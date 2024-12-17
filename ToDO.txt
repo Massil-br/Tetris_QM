@@ -1,0 +1,77 @@
+
+//jeu principal fonctionnalités a réaliser en priorité
+
+Menu principal avec choix pour quitter /jouer /options
+
+création Grid sur lequel on posera les pieces
+
+Création des pièces
+
+piece qui decend
+
+piece qui decend plus vite si on appuie sur une touche
+
+pièce qui change d'orientation
+
+collision avec les murs
+
+collision avec le sol/ autres pieces
+
+ligne complete s'efface et fait tomber le reste
+
+ajout du score a chaque ligne complete
+
+timer du temps joué (session)
+
+génération de pièces aléatoires
+
+voir la prochaine pièce 
+
+nombre de lignes complétées
+
+vitesse de jeu qui s'accélère au fil du temps
+
+
+//priorité graphique
+
+dessiner le grid
+
+dessiner les pieces sur le grid
+
+dessiner la prochaine pièce 
+
+dessiner le score
+
+dessiner le nombre de lignes complétées 
+
+dessiner le temps passé sur la partie
+
+dessiner le meilleur score réalisé
+
+
+// bonus important musiques et changement de touches
+
+
+ajout des musiques
+ajout des effets sonores
+
+options pour régler / désactiver les musiques
+options pour régler / désactiver les effets sonores
+
+
+menu pause
+
+options changement d'attribution des touches
+
+
+
+// bonus moins important que le précédent
+
+pièces gagnées a chaque fin de partie en fonction du score 
+
+boutique pour acheter des pouvoirs 
+
+pouvoir de résurection ( si tu meurs tu casse 6 cases et tu continue)
+
+pouvoir d'explosion ( cercle de dégats aléatoire entre tout en bas et la hauteur max des pieces déja placées sur le grid)
+
