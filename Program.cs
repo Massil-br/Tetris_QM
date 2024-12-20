@@ -6,7 +6,9 @@ namespace Tetris_QMJ
     {
         static void Main(string[] args)
         {
-            src.Core.Game.InitWindow();
+            Grid grid = new();
+            grid.PrintGrid();
+            Game.InitWindow();
         }
     }
 }

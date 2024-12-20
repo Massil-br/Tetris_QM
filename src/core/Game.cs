@@ -15,9 +15,9 @@ namespace Tetris_QMJ.src.Core{
             Font TitleFont = Raylib.LoadFont("assets/font/Team 401.ttf");
             while(!Raylib.WindowShouldClose()){
                 Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.White);
+                Raylib.ClearBackground(Color.Black);
                 
-                Raylib.DrawTextEx(TitleFont, "TETRIS", new Vector2((Raylib.GetRenderWidth()/2)-35,50), 40, 2, Color.Black);
+                Raylib.DrawTextEx(TitleFont, "TETRIS", new Vector2((Raylib.GetRenderWidth()/2)-35,50), 40, 2, Color.Red);
                 Raylib.EndDrawing();
             }
             Raylib.CloseWindow();
