@@ -1,3 +1,8 @@
-When you clone this repository , go on the dir of the project and make this command in the terminal  to get the coding environnement:
-dotnet restore
+After cloning this repository go to the root of the project or in terminal :
+cd ./Tetris_QMJ/
+
+then you need to do this command in terminal to get coding environement :
+
+dotnet restore ./Tetris_QMJ.sln
+
 
