@@ -3,7 +3,7 @@
 
 Menu principal avec choix pour quitter /jouer /options
 
-création Grid sur lequel on posera les pieces  ( Idée si dans l'array c 0 y'a pas de bloc si c'est 1 c rouge 2 bleu etc... pour les couleurs)
+création Grid sur lequel on posera les pieces  ( Idée si dans l'array c 0 y'a pas de bloc si c'est 1 c rouge 2 bleu etc... pour les couleurs)  // DONE
 
 Création des pièces
 
@@ -17,7 +17,7 @@ collision avec les murs
 
 collision avec le sol/ autres pieces
 
-ligne complete s'efface et fait tomber le reste
+ligne complete s'efface et fait tomber le reste //DONE
 
 ajout du score a chaque ligne complete
 
