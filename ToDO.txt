@@ -1,17 +1,17 @@
 
-//jeu principal fonctionnalit�s a r�aliser en priorit�
+//jeu principal fonctionnalités a réaliser en priorité
 
 Menu principal avec choix pour quitter /jouer /options
 
-cr�ation Grid sur lequel on posera les pieces  ( Idée si dans l'array c 0 y'a pas de bloc si c'est 1 c rouge 2 bleu etc... pour les couleurs)
+création Grid sur lequel on posera les pieces  ( Idée si dans l'array c 0 y'a pas de bloc si c'est 1 c rouge 2 bleu etc... pour les couleurs)
 
-Cr�ation des pi�ces
+Création des pièces
 
 piece qui decend
 
 piece qui decend plus vite si on appuie sur une touche
 
-pi�ce qui change d'orientation
+pièce qui change d'orientation
 
 collision avec les murs
 
@@ -21,32 +21,32 @@ ligne complete s'efface et fait tomber le reste
 
 ajout du score a chaque ligne complete
 
-timer du temps jou� (session)
+timer du temps joué (session) 
 
-g�n�ration de pi�ces al�atoires
+génétion de pièces aléatoires
 
-voir la prochaine pi�ce 
+voir la prochaine pièce 
 
-nombre de lignes compl�t�es
+nombre de lignes complétées
 
-vitesse de jeu qui s'acc�l�re au fil du temps
+vitesse de jeu qui s'accélère au fil du temps
 
 
-//priorit� graphique
+//priorité graphique
 
 dessiner le grid
 
 dessiner les pieces sur le grid
 
-dessiner la prochaine pi�ce 
+dessiner la prochaine pièce 
 
 dessiner le score
 
-dessiner le nombre de lignes compl�t�es 
+dessiner le nombre de lignes complétées 
 
-dessiner le temps pass� sur la partie
+dessiner le temps passé sur la partie
 
-dessiner le meilleur score r�alis�
+dessiner le meilleur score réalisé
 
 
 // bonus important musiques et changement de touches
@@ -55,8 +55,8 @@ dessiner le meilleur score r�alis�
 ajout des musiques
 ajout des effets sonores
 
-options pour r�gler / d�sactiver les musiques
-options pour r�gler / d�sactiver les effets sonores
+options pour régler / désactiver les musiques
+options pour régler / désactiver les effets sonores
 
 
 menu pause
@@ -65,13 +65,13 @@ options changement d'attribution des touches
 
 
 
-// bonus moins important que le pr�c�dent
+// bonus moins important que le précédent
 
-pi�ces gagn�es a chaque fin de partie en fonction du score 
+piéces gagnées a chaque fin de partie en fonction du score 
 
 boutique pour acheter des pouvoirs 
 
-pouvoir de r�surection ( si tu meurs tu casse 6 cases et tu continue)
+pouvoir de résurection ( si tu meurs tu casse 6 cases et tu continue)
 
-pouvoir d'explosion ( cercle de d�gats al�atoire entre tout en bas et la hauteur max des pieces d�ja plac�es sur le grid)
+pouvoir d'explosion ( cercle de dégats aléatoire entre tout en bas et la hauteur max des pieces déja placées sur le grid)
 

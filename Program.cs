@@ -8,6 +8,12 @@ namespace Tetris_QMJ
         {
             Grid grid = new();
             grid.PrintGrid();
+            Console.WriteLine("\n");
+            grid.AddFullLine();
+            grid.PrintGrid();
+            Console.WriteLine("\n");
+            grid.ClearFullLines();
+            grid.PrintGrid();
             Game.InitWindow();
         }
     }
