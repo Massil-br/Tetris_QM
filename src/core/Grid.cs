@@ -19,8 +19,8 @@ namespace Tetris_QMJ.src.Core{
             return array;
         }
 
-        public Grid(){
-            GridArray = InitGrid(20,10);
+        public Grid(int heigth , int width ){
+            GridArray = InitGrid(heigth,width);
         }
 
         public void PrintGrid(){
