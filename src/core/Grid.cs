@@ -66,5 +66,34 @@ namespace Tetris_QMJ.src.Core{
 
             return true; // Pièce ajoutée avec succès
         }
+
+
+        //ClearFullLines func permet de supprimer une ligne si elle est complete de gauche a droite dans le grid
+        public void ClearFullLines(){
+            for (int i = GridArray.GetLength(0) -1 ; i >= 0 ; i--){
+                bool fullLine = true;
+
+                for (int ii = 0; ii < GridArray.GetLength(1); ii++){
+                    if (GridArray[i,ii]== 0){
+                        fullLine = false;
+                        break;
+                    }
+                }
+
+                if (fullLine){
+                    for (int row = i; row > 0 ; row --){
+                        for (int col = 0; col < GridArray.GetLength(1); col ++){
+                            GridArray[row,col] = GridArray[row -1, col];
+                        }
+                    }
+
+                    for (int col = 0; col < GridArray.GetLength(1); col++){
+                        GridArray[0,col]= 0;
+                    }
+                    i++;
+                }
+
+            }
+        }
     }
 }
