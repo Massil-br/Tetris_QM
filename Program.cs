@@ -1,5 +1,4 @@
-﻿using System;
-using Tetris_QMJ.src.Core;
+﻿using Tetris_QMJ.src.Core;
 namespace Tetris_QMJ
 {
     class Program

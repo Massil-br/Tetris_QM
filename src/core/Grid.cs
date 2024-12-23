@@ -1,11 +1,5 @@
 
-
-using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
-using System.Xml.XPath;
 using Raylib_cs;
 
 namespace Tetris_QMJ.src.Core{
@@ -17,6 +11,8 @@ namespace Tetris_QMJ.src.Core{
         static Color Red = new Color(255, 0, 0, 255);       // Pièce Z
         static Color Blue = new Color(0, 0, 255, 255);      // Pièce J
         static Color Orange = new Color(255, 165, 0, 255);  // Pièce L
+
+        // Dictionnaire associant chaque ID de pièce à sa couleur
         static Dictionary<int, Color> pieceColors = new Dictionary<int, Color>
         {
             { 1, Cyan },    // Pièce I
