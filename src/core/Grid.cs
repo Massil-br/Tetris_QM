@@ -68,7 +68,7 @@ namespace Tetris_QMJ.src.Core{
             {
                 for (int j = 0; j < piece.Shape.GetLength(1); j++)
                 {
-                    if (piece.Shape[i, j] == 1) // Si c'est une partie de la pièce
+                    if (piece.Shape[i, j] == 1)
                     {
                         int gridX = piece.X + i;
                         int gridY = piece.Y + j;
@@ -76,7 +76,7 @@ namespace Tetris_QMJ.src.Core{
                         // Vérification des limites et des collisions
                         if (gridX >= GridArray.GetLength(0) || gridY >= GridArray.GetLength(1) || gridX < 0 || gridY < 0 || GridArray[gridX, gridY] != 0)
                         {
-                            return false; // Collision ou hors limites
+                            return false;
                         }
                     }
                 }
@@ -89,12 +89,27 @@ namespace Tetris_QMJ.src.Core{
                 {
                     if (piece.Shape[i, j] == 1)
                     {
-                        GridArray[piece.X + i, piece.Y + j] = piece.Id; // Ajout du ID de la pièce
+                        GridArray[piece.X + i, piece.Y + j] = piece.Id;
                     }
                 }
             }
 
-            return true; // Pièce ajoutée avec succès
+            return true;
+        }
+
+        // Supprimer une pièce de la grille
+        public void RemovePiece(Entities.Piece piece)
+        {
+            for (int i = 0; i < piece.Shape.GetLength(0); i++)
+            {
+                for (int j = 0; j < piece.Shape.GetLength(1); j++)
+                {
+                    if (piece.Shape[i, j] == 1)
+                    {
+                        GridArray[piece.X + i, piece.Y + j] = 0;
+                    }
+                }
+            }
         }
 
 

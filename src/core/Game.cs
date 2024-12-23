@@ -9,30 +9,48 @@ namespace Tetris_QMJ.src.Core{
         const int gridColumns = 10;
         const int gridRows = 20;
         static  Grid grid = new(gridRows,gridColumns);
-        public static void InitWindow(){
-            
+        private static bool isPlaying = false;
+        public static void InitWindow()
+        {
             Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
-            Raylib.InitWindow(width ,height,"Tetris");
-            Raylib.SetTargetFPS(60);
+            Raylib.InitWindow(width, height, "Tetris");
+            Raylib.SetTargetFPS(165);
             Font MainMenuFont = Raylib.LoadFont("assets/font/Team 401.ttf");
             MainMenu.InitButtonTextures();
-            //this while loop is called every frame
+            
             int EntryCode = 0;
-            while(!Raylib.WindowShouldClose()){
-
+            while (!Raylib.WindowShouldClose())
+            {
                 int windowHeight = Raylib.GetRenderHeight();
                 int windowWidth = Raylib.GetRenderWidth();
-                if(EntryCode == 0){
-                    EntryCode = MainMenu.PrintMainMenu(windowWidth,windowHeight, MainMenuFont);
-                }else if (EntryCode == 1){
-                    GameLoop(windowHeight,windowWidth, grid);
-                }else if (EntryCode == 2){
-                    //optionWindowCode en dessous
-                }else if (EntryCode == 99){
-                    Raylib.CloseWindow();
-                    Environment.Exit(0);
-                } 
+
+                if (!isPlaying)
+                {
+                    if (EntryCode == 0)
+                    {
+                        EntryCode = MainMenu.PrintMainMenu(windowWidth, windowHeight, MainMenuFont);
+                    }
+                    else if (EntryCode == 1)
+                    {
+                        isPlaying = true;
+                    }
+                    else if (EntryCode == 2)
+                    {
+                        // Option window logic, if you have any.
+                    }
+                    else if (EntryCode == 99)
+                    {
+                        Raylib.CloseWindow();
+                        Environment.Exit(0);
+                    }
+                }
+                if (isPlaying)
+                {
+                    GameLoop(windowHeight, windowWidth, grid);
+                    isPlaying = false; 
+                }
             }
+
             Raylib.CloseWindow();
         }
 
@@ -41,12 +59,29 @@ namespace Tetris_QMJ.src.Core{
             int offsetX = (windowWidth - (gridColumns * cellSize)) / 2;
             int offsetY = (windowHeight - (gridRows * cellSize)) / 2;
 
-            Entities.Piece randomPiece = Entities.PieceFactory.GenerateRandomPiece();
+            // Génère une nouvelle pièce aléatoire
+            Entities.Piece randomPiece = Entities.PieceFactory.GenerateRandomPiece(1);
             grid.AddPiece(randomPiece);
-            grid.PrintGrid(gridRows,gridColumns,offsetX,offsetY, cellSize);    
-        }
 
-                   
+            Move moveHandler = new Move(grid);
+            moveHandler.SetPiece(randomPiece);
+
+            // La boucle de jeu continue tant que la fenêtre n'est pas fermée
+            while (!Raylib.WindowShouldClose()){
+                Raylib.BeginDrawing();  // Démarre la phase de dessin
+                Raylib.ClearBackground(Color.Black);  // Efface l'écran en noir
+
+                // Calcul du deltaTime (temps écoulé depuis le dernier frame)
+                float deltaTime = Raylib.GetFrameTime();
+
+                // Met à jour le timer et déplace la pièce si nécessaire
+                moveHandler.UpdateTimer(deltaTime);
+
+                // Dessine la grille et la pièce
+                grid.PrintGrid(gridRows, gridColumns, offsetX, offsetY, cellSize);
+                moveHandler.HandleInput();
+            }
+        }          
     }
 }
 

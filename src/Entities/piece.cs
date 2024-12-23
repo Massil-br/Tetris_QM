@@ -9,6 +9,7 @@ namespace Tetris_QMJ.src.Entities
         public int X { get; set;}
         public int Y { get; set;}
         public int[,] Shape { get; set; }
+
         public Piece(int id, int x, int y, int[,] shape)
         {
             Id = id;
@@ -36,7 +37,7 @@ namespace Tetris_QMJ.src.Entities
             };
         }
 
-        public static Piece GenerateRandomPiece()
+        public static Piece GenerateRandomPiece(int largeur)
         {
             List<Piece> pieces = GeneratePieces();
             int randomIndex = RandomGenerator.Next(pieces.Count); // Sélection aléatoire
