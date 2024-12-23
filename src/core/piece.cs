@@ -20,6 +20,8 @@ namespace Tetris_QMJ.src.Core
 
     public static class PieceFactory
     {
+        private static readonly Random RandomGenerator = new Random(); // Générateur aléatoire
+
         public static List<Piece> GeneratePieces()
         {
             return new List<Piece>
@@ -32,6 +34,21 @@ namespace Tetris_QMJ.src.Core
                 new Piece(6, 0, 0, new int[,] { { 1, 0, 0 }, { 1, 1, 1 } }), // J
                 new Piece(7, 0, 0, new int[,] { { 0, 0, 1 }, { 1, 1, 1 } })  // L
             };
+        }
+
+        public static Piece GenerateRandomPiece()
+        {
+            List<Piece> pieces = GeneratePieces();
+            int randomIndex = RandomGenerator.Next(pieces.Count); // Sélection aléatoire
+            Piece selectedPiece = pieces[randomIndex];
+
+            // Retourner une copie pour éviter les modifications accidentelles
+            return new Piece(
+                selectedPiece.Id,
+                selectedPiece.X,
+                selectedPiece.Y,
+                selectedPiece.Shape
+            );
         }
     }
 }
