@@ -1,7 +1,7 @@
 
 //jeu principal fonctionnalités a réaliser en priorité
 
-Menu principal avec choix pour quitter /jouer /options
+Menu principal avec choix pour quitter /jouer /options ✅
 
 création Grid sur lequel on posera les pieces  ( Idée si dans l'array c 0 y'a pas de bloc si c'est 1 c rouge 2 bleu etc... pour les couleurs)  ✅
 
@@ -33,6 +33,8 @@ vitesse de jeu qui s'accélère au fil du temps
 
 
 //priorité graphique
+
+dessiner le main menu ✅
 
 dessiner le grid ✅
 
