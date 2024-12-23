@@ -1,13 +1,32 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Xml.XPath;
+using Raylib_cs;
 
 namespace Tetris_QMJ.src.Core{
     public class Grid{
+        static Color Cyan = new Color(0, 255, 255, 255);    // Pièce I
+        static Color Yellow = new Color(255, 255, 0, 255);  // Pièce O
+        static Color Purple = new Color(128, 0, 128, 255);  // Pièce T
+        static Color Green = new Color(0, 255, 0, 255);     // Pièce S
+        static Color Red = new Color(255, 0, 0, 255);       // Pièce Z
+        static Color Blue = new Color(0, 0, 255, 255);      // Pièce J
+        static Color Orange = new Color(255, 165, 0, 255);  // Pièce L
+        static Dictionary<int, Color> pieceColors = new Dictionary<int, Color>
+        {
+            { 1, Cyan },    // Pièce I
+            { 2, Yellow },  // Pièce O
+            { 3, Purple },  // Pièce T
+            { 4, Green },   // Pièce S
+            { 5, Red },     // Pièce Z
+            { 6, Blue },    // Pièce J
+            { 7, Orange }   // Pièce L
+        };
         public int[,] GridArray{get;set;}
         private int[,] InitGrid(int width, int heigth) {
             int[,] array = new int[width,heigth];
@@ -23,13 +42,28 @@ namespace Tetris_QMJ.src.Core{
             GridArray = InitGrid(heigth,width);
         }
 
-        public void PrintGrid(){
-            for (int i = 0; i < GridArray.GetLength(0); i++){
-                for (int ii = 0 ; ii < GridArray.GetLength(1); ii++){
-                    Console.Write(GridArray[i,ii]);
+        public void PrintGrid(int gridRows, int gridColumns, int offsetX, int offsetY, int cellSize){
+            Raylib.BeginDrawing();
+            Raylib.ClearBackground(Color.Black);
+            for (int row = 0; row < gridRows; row++){
+                for (int col = 0; col < gridColumns; col++){
+                    int cellValue = GridArray[row, col];
+                    int x = offsetX + (col * cellSize);
+                    int y = offsetY + (row * cellSize);
+
+                    // Si la cellule n'est pas vide, colorie en fonction de l'ID
+                    if (cellValue != 0)
+                    {
+                        // Récupère la couleur en fonction de l'ID, sinon utilise une couleur par défaut
+                        Color pieceColor = pieceColors.ContainsKey(cellValue) ? pieceColors[cellValue] : Color.White;
+                        Raylib.DrawRectangle(x, y, cellSize, cellSize, pieceColor);
+                    }
+                    int borderX = offsetX + (col * cellSize);
+                    int borderY = offsetY + (row * cellSize);
+                    Raylib.DrawRectangleLines(borderX, borderY, cellSize, cellSize, Color.Gray);
                 }
-                Console.Write("\n");
             }
+            Raylib.EndDrawing();
         }
 
         public bool AddPiece(Entities.Piece piece)
