@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Tetris_QMJ.src.Core
+namespace Tetris_QMJ.src.Entities
 {
     public class Piece
     {

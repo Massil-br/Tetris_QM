@@ -32,7 +32,7 @@ namespace Tetris_QMJ.src.Core{
             }
         }
 
-        public bool AddPiece(Piece piece)
+        public bool AddPiece(Entities.Piece piece)
         {
             for (int i = 0; i < piece.Shape.GetLength(0); i++)
             {

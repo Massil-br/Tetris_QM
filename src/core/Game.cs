@@ -58,7 +58,7 @@ namespace Tetris_QMJ.src.Core{
         }
 
         public static void GameLoop(int windowHeight, int windowWidth, Grid grid){
-            Piece randomPiece = PieceFactory.GenerateRandomPiece();
+            Entities.Piece randomPiece = Entities.PieceFactory.GenerateRandomPiece();
             grid.AddPiece(randomPiece);
             int cellSize = Math.Min(windowWidth / (gridColumns + 2), windowHeight / (gridRows + 2));
 
