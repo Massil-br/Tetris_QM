@@ -1,6 +1,6 @@
 using System;
 using Raylib_cs;
-
+using Tetris_QMJ.src.Interfaces;
 
 namespace Tetris_QMJ.src.Core{
     public class Game{
@@ -14,14 +14,24 @@ namespace Tetris_QMJ.src.Core{
             Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
             Raylib.InitWindow(width ,height,"Tetris");
             Raylib.SetTargetFPS(60);
-            Font MainMenuFont = Raylib.LoadFont("/assets/font/Team 401.ttf");
+            Font MainMenuFont = Raylib.LoadFont("assets/font/Team 401.ttf");
+            MainMenu.InitButtonTextures();
             //this while loop is called every frame
+            int EntryCode = 0;
             while(!Raylib.WindowShouldClose()){
+
                 int windowHeight = Raylib.GetRenderHeight();
                 int windowWidth = Raylib.GetRenderWidth();
-                //MainMenu.PrintMainMenu(windowWidth,windowHeight, MainMenuFont);
-                GameLoop(windowHeight,windowWidth, grid);
-                
+                if(EntryCode == 0){
+                    EntryCode = MainMenu.PrintMainMenu(windowWidth,windowHeight, MainMenuFont);
+                }else if (EntryCode == 1){
+                    GameLoop(windowHeight,windowWidth, grid);
+                }else if (EntryCode == 2){
+                    //optionWindowCode en dessous
+                }else if (EntryCode == 99){
+                    Raylib.CloseWindow();
+                    Environment.Exit(0);
+                } 
             }
             Raylib.CloseWindow();
         }
@@ -34,8 +44,6 @@ namespace Tetris_QMJ.src.Core{
             Entities.Piece randomPiece = Entities.PieceFactory.GenerateRandomPiece();
             grid.AddPiece(randomPiece);
             grid.PrintGrid(gridRows,gridColumns,offsetX,offsetY, cellSize);    
-
-            
         }
 
                    
