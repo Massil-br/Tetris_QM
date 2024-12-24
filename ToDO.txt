@@ -23,7 +23,7 @@ ajout du score a chaque ligne complete
 
 timer du temps joué (session) 
 
-génétion de pièces aléatoires
+génétion de pièces aléatoires ✅
 
 voir la prochaine pièce 
 
@@ -38,7 +38,7 @@ dessiner le main menu ✅
 
 dessiner le grid ✅
 
-dessiner les pieces sur le grid 
+dessiner les pieces sur le grid ✅
 
 dessiner la prochaine pièce 
 
