@@ -54,11 +54,17 @@ namespace Tetris_QMJ.src.Core {
             if (piece == null) {
                 throw new InvalidOperationException("Piece is null in MoveLeft");
             }
+            if (piece.Y != 0){
+                grid.RemovePiece(piece);
+            }
+            
 
             piece.Y -= 1;
 
             if (!grid.AddPiece(piece)) {
                 piece.Y += 1; 
+            }else{
+                grid.AddPiece(piece);
             }
         }
 
@@ -66,11 +72,17 @@ namespace Tetris_QMJ.src.Core {
             if (piece == null) {
                 throw new InvalidOperationException("Piece is null in MoveRight");
             }
-
+            // sinon on implémente la position la plus loin a l'horizontale en tant que variable dans le fichier piece.cs et on compare par rapport a cette pos pour si on appelle remove piece ou pas
+            if (piece.Y != grid.GridArray.GetLength(1)-2/* && piece = Z/S/carré || (piece == L T && piece.Y != gridArray.GetLength(1)-3) || (piece == ligne && piece.y != array.getlength(0)-4)          et on change la logique la ligne -> -2 si dans la position de haut en bas , les L array.getlength(1) -2 si position haut vers le bas*/){
+                grid.RemovePiece(piece);
+            }
+            
             piece.Y += 1;
 
             if (!grid.AddPiece(piece)) {
                 piece.Y -= 1; 
+            }else{
+                grid.AddPiece(piece);
             }
         }
 
