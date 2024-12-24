@@ -55,9 +55,13 @@ namespace Tetris_QMJ.src.Core{
             // Génère une nouvelle pièce aléatoire
             Entities.Piece randomPiece = Entities.PieceFactory.GenerateRandomPiece(1);
             grid.AddPiece(randomPiece);
+            grid.SetActivePiece(randomPiece);
 
+            Rotation rotateHandler = new Rotation(grid);
             Move moveHandler = new Move(grid);
             moveHandler.SetPiece(randomPiece);
+
+            // Rotation rotateHandler = new Rotation(grid);
 
             // La boucle de jeu continue tant que la fenêtre n'est pas fermée
             while (!Raylib.WindowShouldClose()){
@@ -73,6 +77,8 @@ namespace Tetris_QMJ.src.Core{
                 // Dessine la grille et la pièce
                 grid.PrintGrid(gridRows, gridColumns, offsetX, offsetY, cellSize);
                 moveHandler.HandleInput();
+                rotateHandler.HandleInput();
+                
             }
         }          
     }

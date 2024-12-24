@@ -9,6 +9,8 @@ namespace Tetris_QMJ.src.Entities
         public int X { get; set;}
         public int Y { get; set;}
         public int[,] Shape { get; set; }
+        public bool IsActive { get; set; } = true;
+
 
         public Piece(int id, int x, int y, int[,] shape)
         {
@@ -16,6 +18,19 @@ namespace Tetris_QMJ.src.Entities
             X = x;
             Y = y;
             Shape = shape;
+        }
+
+        public void Rotation90(){
+            int rows = Shape.GetLength(0);
+            int column = Shape.GetLength(1);
+            int [,] rotate = new int[column, rows];
+
+            for (int i = 0; i <rows; i++){
+                for (int j = 0; j < column; j++){
+                    rotate[j, rows - i - 1] = Shape[i, j];
+                }
+            }
+            Shape = rotate;
         }
     }
 

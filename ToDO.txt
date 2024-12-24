@@ -7,15 +7,15 @@ création Grid sur lequel on posera les pieces  ( Idée si dans l'array c 0 y'a 
 
 Création des pièces ✅
 
-piece qui decend
+piece qui decend ✅
 
-piece qui decend plus vite si on appuie sur une touche
+piece qui decend plus vite si on appuie sur une touche ✅
 
 pièce qui change d'orientation
 
-collision avec les murs
+collision avec les murs ✅
 
-collision avec le sol/ autres pieces
+collision avec le sol/ autres pieces ✅
 
 ligne complete s'efface et fait tomber le reste ✅
 
@@ -38,7 +38,7 @@ dessiner le main menu ✅
 
 dessiner le grid ✅
 
-dessiner les pieces sur le grid 
+dessiner les pieces sur le grid ✅
 
 dessiner la prochaine pièce 
 

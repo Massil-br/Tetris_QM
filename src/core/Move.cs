@@ -1,11 +1,11 @@
 using System;
 using Raylib_cs;
-using Tetris_QMJ.src.Interfaces;
 
 namespace Tetris_QMJ.src.Core {
     public class Move {
         private Grid grid;
         private Entities.Piece piece;
+        private Rotation rotation;
         private float timer;
         private float intervalMove = 0.8f; 
 
@@ -26,10 +26,12 @@ namespace Tetris_QMJ.src.Core {
             if (!grid.AddPiece(piece)) {
                 piece.X -= 1; 
                 grid.AddPiece(piece);
-
+                piece.IsActive = false;
                 grid.ClearFullLines();
-
-                piece = Entities.PieceFactory.GenerateRandomPiece(grid.GridArray.GetLength(1));
+                Entities.Piece newPiece = Entities.PieceFactory.GenerateRandomPiece(grid.GridArray.GetLength(1));
+                grid.AddPiece(newPiece);
+                grid.SetActivePiece(newPiece);
+                SetPiece(newPiece);
             } else {
 
                 grid.AddPiece(piece);
@@ -48,6 +50,10 @@ namespace Tetris_QMJ.src.Core {
             if (Raylib.IsKeyPressed(KeyboardKey.Down)) {
                 MoveDown();
             }
+
+            // if (Raylib.IsKeyPressed(KeyboardKey.Up)){
+            //     rotation.RotatePiece();
+            // }
         }
 
         public void MoveLeft() {
@@ -97,6 +103,7 @@ namespace Tetris_QMJ.src.Core {
 
         public void SetPiece(Entities.Piece newPiece) {
             this.piece = newPiece;
+            grid.SetActivePiece(newPiece);
         }
 
     }

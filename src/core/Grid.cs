@@ -1,6 +1,8 @@
 
+using System;
 using System.Collections.Generic;
 using Raylib_cs;
+using Tetris_QMJ.src.Entities;
 
 namespace Tetris_QMJ.src.Core{
     public class Grid{
@@ -23,6 +25,8 @@ namespace Tetris_QMJ.src.Core{
             { 6, Blue },    // Pièce J
             { 7, Orange }   // Pièce L
         };
+        private Piece ActivePiece;
+
         public int[,] GridArray{get;set;}
         private int[,] InitGrid(int width, int heigth) {
             int[,] array = new int[width,heigth];
@@ -139,6 +143,21 @@ namespace Tetris_QMJ.src.Core{
                 }
 
             }
+        }
+
+        public void Update(Entities.Piece piece){
+            RemovePiece(piece);
+            if (!AddPiece(piece)){
+                throw new InvalidOperationException("Impossible d'ajouter la pièce après rotation.");
+            }
+        }
+
+        public Entities.Piece GetPiece() {
+            return ActivePiece;
+        }
+
+        public void SetActivePiece(Entities.Piece piece) {
+            ActivePiece = piece;
         }
     }
 }
