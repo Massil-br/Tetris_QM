@@ -11,7 +11,7 @@ piece qui decend ✅
 
 piece qui decend plus vite si on appuie sur une touche ✅
 
-pièce qui change d'orientation
+pièce qui change d'orientation ✅
 
 collision avec les murs ✅
 
@@ -38,7 +38,7 @@ dessiner le main menu ✅
 
 dessiner le grid ✅
 
-dessiner les pieces sur le grid ✅
+dessiner les pieces sur le grid 
 
 dessiner la prochaine pièce 
 
