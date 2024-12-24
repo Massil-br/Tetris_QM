@@ -26,34 +26,21 @@ namespace Tetris_QMJ.src.Core{
             {
                 int windowHeight = Raylib.GetRenderHeight();
                 int windowWidth = Raylib.GetRenderWidth();
-
-                if (!isPlaying)
-                {
-                    if (EntryCode == 0)
-                    {
-                        EntryCode = MainMenu.PrintMainMenu(windowWidth, windowHeight, MainMenuFont);
-                        AudioGame.PlayMusic(AudioGame.musicBackgroundMainMenu1);
-                    }
-                    else if (EntryCode == 1)
-                    {    
-                        isPlaying = true;
-                    }
-                    else if (EntryCode == 2)
-                    {
-                        // Option window logic, if you have any.
-                    }
-                    else if (EntryCode == 99)
-                    {
-                        Raylib.CloseWindow();
-                        Environment.Exit(0);
-                    }
+                if (EntryCode == 0){
+                    EntryCode = MainMenu.PrintMainMenu(windowWidth, windowHeight, MainMenuFont);
+                    AudioGame.PlayMusic(AudioGame.musicBackgroundMainMenu1);
                 }
-
-                if (isPlaying)
-                {   
+                else if (EntryCode == 1){    
                     GameLoop(windowHeight, windowWidth, grid);
                     isPlaying = false;
                 }
+                else if (EntryCode == 2){
+                        // Option window logic, if you have any.
+                }else if (EntryCode == 99){
+                        Raylib.CloseWindow();
+                        Environment.Exit(0);
+                }
+ 
             }
             AudioGame.UnloadAudioResources();
             Raylib.CloseAudioDevice();
