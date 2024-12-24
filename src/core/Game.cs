@@ -1,5 +1,6 @@
 using System;
 using Raylib_cs;
+using Tetris_QMJ.src.Audio;
 using Tetris_QMJ.src.Interfaces;
 
 namespace Tetris_QMJ.src.Core{
@@ -14,6 +15,8 @@ namespace Tetris_QMJ.src.Core{
         {
             Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
             Raylib.InitWindow(width, height, "Tetris");
+            Raylib.InitAudioDevice();
+            AudioGame.InitAudioGame();
             Raylib.SetTargetFPS(165);
             Font MainMenuFont = Raylib.LoadFont("assets/font/Team 401.ttf");
             MainMenu.InitButtonTextures();
@@ -29,9 +32,10 @@ namespace Tetris_QMJ.src.Core{
                     if (EntryCode == 0)
                     {
                         EntryCode = MainMenu.PrintMainMenu(windowWidth, windowHeight, MainMenuFont);
+                        AudioGame.PlayMusic(AudioGame.musicBackgroundMainMenu1);
                     }
                     else if (EntryCode == 1)
-                    {
+                    {    
                         isPlaying = true;
                     }
                     else if (EntryCode == 2)
@@ -44,13 +48,15 @@ namespace Tetris_QMJ.src.Core{
                         Environment.Exit(0);
                     }
                 }
+
                 if (isPlaying)
-                {
+                {   
                     GameLoop(windowHeight, windowWidth, grid);
-                    isPlaying = false; 
+                    isPlaying = false;
                 }
             }
-
+            AudioGame.UnloadAudioResources();
+            Raylib.CloseAudioDevice();
             Raylib.CloseWindow();
         }
 
@@ -58,7 +64,7 @@ namespace Tetris_QMJ.src.Core{
             int cellSize = Math.Min(windowWidth / (gridColumns + 2), windowHeight / (gridRows + 2));
             int offsetX = (windowWidth - (gridColumns * cellSize)) / 2;
             int offsetY = (windowHeight - (gridRows * cellSize)) / 2;
-
+            
             // Génère une nouvelle pièce aléatoire
             Entities.Piece randomPiece = Entities.PieceFactory.GenerateRandomPiece(1);
             grid.AddPiece(randomPiece);
