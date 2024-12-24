@@ -19,7 +19,7 @@ namespace Tetris_QMJ.src.Core {
 
         public void HandleInput() {
             // Vérifie si la barre d'espace est pressée
-            if (Raylib.IsKeyPressed(KeyboardKey.Up)) {
+            if (Raylib.IsKeyPressed(KeyboardKey.Space)) {
                 RotatePiece();
             }
         }
