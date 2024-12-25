@@ -21,7 +21,7 @@ ligne complete s'efface et fait tomber le reste ✅
 
 ajout du score a chaque ligne complete
 
-timer du temps joué (session) 
+timer du temps joué (session) ✅
 
 génétion de pièces aléatoires ✅
 
