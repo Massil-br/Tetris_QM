@@ -63,7 +63,7 @@ namespace Tetris_QMJ.src.Core{
             moveHandler.SetPiece(randomPiece);
             
             Timer timer = new Timer();
-            Font font = Raylib.LoadFont("assets/font/Team 401.ttf");
+            Font font = Raylib.LoadFont("assets/font/College Squad Regular.ttf");
 
             // La boucle de jeu continue tant que la fenêtre n'est pas fermée
             while (!Raylib.WindowShouldClose()){
