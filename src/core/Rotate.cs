@@ -27,7 +27,7 @@ namespace Tetris_QMJ.src.Core {
         public void RotatePiece() {
             piece = grid.GetPiece();
 
-            if (piece != null && piece.IsActive) { // Vérifiez si la pièce est active
+            if (piece != null && piece.IsActive) { 
                 grid.RemovePiece(piece); 
                 piece.Rotation90();
 

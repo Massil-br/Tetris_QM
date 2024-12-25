@@ -1,4 +1,5 @@
 using System;
+using System.Linq.Expressions;
 using Raylib_cs;
 using Tetris_QMJ.src.Audio;
 using Tetris_QMJ.src.Interfaces;
@@ -60,8 +61,9 @@ namespace Tetris_QMJ.src.Core{
             Rotation rotateHandler = new Rotation(grid);
             Move moveHandler = new Move(grid);
             moveHandler.SetPiece(randomPiece);
-
-            // Rotation rotateHandler = new Rotation(grid);
+            
+            Timer timer = new Timer();
+            Font font = Raylib.LoadFont("assets/font/Team 401.ttf");
 
             // La boucle de jeu continue tant que la fenêtre n'est pas fermée
             while (!Raylib.WindowShouldClose()){
@@ -73,6 +75,18 @@ namespace Tetris_QMJ.src.Core{
 
                 // Met à jour le timer et déplace la pièce si nécessaire
                 moveHandler.UpdateTimer(deltaTime);
+
+                // Mise à jour et affichage du timer
+                timer.UpdateTimer();
+                timer.ShowTime(10, 10, font, 20, Color.White);
+
+                // Gérer les nouvelles pièces
+                if (!grid.GetPiece().IsActive) {
+                    Entities.Piece newPiece = Entities.PieceFactory.GenerateRandomPiece(1);
+                    grid.AddPiece(newPiece);
+                    grid.SetActivePiece(newPiece);
+                    moveHandler.SetPiece(newPiece);
+                }
 
                 // Dessine la grille et la pièce
                 grid.PrintGrid(gridRows, gridColumns, offsetX, offsetY, cellSize);
