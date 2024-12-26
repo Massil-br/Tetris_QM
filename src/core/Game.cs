@@ -11,7 +11,6 @@ namespace Tetris_QMJ.src.Core{
         const int gridColumns = 10;
         const int gridRows = 20;
         static  Grid grid = new(gridRows,gridColumns);
-        private static bool isPlaying = false;
         public static void InitWindow()
         {
             Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
@@ -33,7 +32,7 @@ namespace Tetris_QMJ.src.Core{
                 }
                 else if (EntryCode == 1){    
                     GameLoop(windowHeight, windowWidth, grid);
-                    isPlaying = false;
+                    
                 }
                 else if (EntryCode == 2){
                         // Option window logic, if you have any.
@@ -67,6 +66,7 @@ namespace Tetris_QMJ.src.Core{
 
             // La boucle de jeu continue tant que la fenêtre n'est pas fermée
             while (!Raylib.WindowShouldClose()){
+                AudioGame.PlayMusic(AudioGame.musicBackgroundMainMenu1);
                 Raylib.BeginDrawing();  // Démarre la phase de dessin
                 Raylib.ClearBackground(Color.Black);  // Efface l'écran en noir
 
@@ -78,7 +78,7 @@ namespace Tetris_QMJ.src.Core{
 
                 // Mise à jour et affichage du timer
                 timer.UpdateTimer();
-                timer.ShowTime(10, 10, font, 20, Color.White);
+                timer.ShowTime(10, 10, font, 40, Color.White);
 
                 // Gérer les nouvelles pièces
                 if (!grid.GetPiece().IsActive) {
