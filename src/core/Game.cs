@@ -31,7 +31,7 @@ namespace Tetris_QMJ.src.Core{
                     AudioGame.PlayMusic(AudioGame.musicBackgroundMainMenu1);
                 }
                 else if (EntryCode == 1){    
-                    GameLoop(windowHeight, windowWidth, grid);
+                    GameLoop( grid);
                     
                 }
                 else if (EntryCode == 2){
@@ -47,7 +47,9 @@ namespace Tetris_QMJ.src.Core{
             Raylib.CloseWindow();
         }
 
-        public static void GameLoop(int windowHeight, int windowWidth, Grid grid){
+        public static void GameLoop( Grid grid){
+            int windowHeight= Raylib.GetRenderHeight();
+            int windowWidth = Raylib.GetRenderWidth();
             int cellSize = Math.Min(windowWidth / (gridColumns + 2), windowHeight / (gridRows + 2));
             int offsetX = (windowWidth - (gridColumns * cellSize)) / 2;
             int offsetY = (windowHeight - (gridRows * cellSize)) / 2;
@@ -66,6 +68,11 @@ namespace Tetris_QMJ.src.Core{
 
             // La boucle de jeu continue tant que la fenêtre n'est pas fermée
             while (!Raylib.WindowShouldClose()){
+                windowHeight= Raylib.GetRenderHeight();
+                windowWidth = Raylib.GetRenderWidth();
+                cellSize = Math.Min(windowWidth / (gridColumns + 2), windowHeight / (gridRows + 2));
+                offsetX = (windowWidth - (gridColumns * cellSize)) / 2;
+                offsetY = (windowHeight - (gridRows * cellSize)) / 2;
                 AudioGame.PlayMusic(AudioGame.musicBackgroundMainMenu1);
                 Raylib.BeginDrawing();  // Démarre la phase de dessin
                 Raylib.ClearBackground(Color.Black);  // Efface l'écran en noir
