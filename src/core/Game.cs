@@ -4,6 +4,7 @@ using Raylib_cs;
 using Tetris_QMJ.src.Audio;
 using Tetris_QMJ.src.Interfaces;
 
+
 namespace Tetris_QMJ.src.Core{
     public class Game{
         const int width = 800;
@@ -13,6 +14,7 @@ namespace Tetris_QMJ.src.Core{
         static  Grid grid = new(gridRows,gridColumns);
         public static void InitWindow()
         {
+            
             Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
             Raylib.InitWindow(width, height, "Tetris");
             Raylib.InitAudioDevice();
@@ -20,6 +22,7 @@ namespace Tetris_QMJ.src.Core{
             Raylib.SetTargetFPS(165);
             Font MainMenuFont = Raylib.LoadFont("assets/font/Team 401.ttf");
             MainMenu.InitButtonTextures();
+            Raylib.SetExitKey(KeyboardKey.Null);
             
             int EntryCode = 0;
             while (!Raylib.WindowShouldClose())
@@ -31,11 +34,14 @@ namespace Tetris_QMJ.src.Core{
                     AudioGame.PlayMusic(AudioGame.musicBackgroundMainMenu1);
                 }
                 else if (EntryCode == 1){    
-                    GameLoop( grid);
+                    grid = new Grid(gridRows,gridColumns);
+                    EntryCode = GameLoop( grid);
                     
                 }
                 else if (EntryCode == 2){
-                        // Option window logic, if you have any.
+                    // Option window logic, if you have any.
+                    Console.WriteLine("PAUUUUSE");
+                    EntryCode = 0;  
                 }else if (EntryCode == 99){
                         Raylib.CloseWindow();
                         Environment.Exit(0);
@@ -47,7 +53,7 @@ namespace Tetris_QMJ.src.Core{
             Raylib.CloseWindow();
         }
 
-        public static void GameLoop( Grid grid){
+        public static int GameLoop( Grid grid){
             int windowHeight= Raylib.GetRenderHeight();
             int windowWidth = Raylib.GetRenderWidth();
             int cellSize = Math.Min(windowWidth / (gridColumns + 2), windowHeight / (gridRows + 2));
@@ -68,6 +74,7 @@ namespace Tetris_QMJ.src.Core{
 
             // La boucle de jeu continue tant que la fenêtre n'est pas fermée
             while (!Raylib.WindowShouldClose()){
+
                 windowHeight= Raylib.GetRenderHeight();
                 windowWidth = Raylib.GetRenderWidth();
                 cellSize = Math.Min(windowWidth / (gridColumns + 2), windowHeight / (gridRows + 2));
@@ -76,6 +83,7 @@ namespace Tetris_QMJ.src.Core{
                 AudioGame.PlayMusic(AudioGame.musicBackgroundMainMenu1);
                 Raylib.BeginDrawing();  // Démarre la phase de dessin
                 Raylib.ClearBackground(Color.Black);  // Efface l'écran en noir
+                
 
                 // Calcul du deltaTime (temps écoulé depuis le dernier frame)
                 float deltaTime = Raylib.GetFrameTime();
@@ -98,9 +106,12 @@ namespace Tetris_QMJ.src.Core{
                 // Dessine la grille et la pièce
                 grid.PrintGrid(gridRows, gridColumns, offsetX, offsetY, cellSize);
                 moveHandler.HandleInput();
-                rotateHandler.HandleInput();
-                
+                rotateHandler.HandleInput(); 
+                if (Raylib.IsKeyPressed(KeyboardKey.Escape)){
+                    return 2;
+                }
             }
+            return 99;
         }          
     }
 }
