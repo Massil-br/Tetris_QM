@@ -15,8 +15,14 @@ namespace Tetris_QMJ.src.Core {
         // Intervalles pour les contrôles utilisateurs
         private const float controlInterval = 0.1f;
 
+        private const float maxSpeed = 0.2f;
+
+        private Timer timeGen;
+        private int lastMinForSpeed = 0;
+
         public Move(Grid grid) {
             this.grid = grid;
+            this.timeGen = new Timer();
         }
 
         public void MoveDown() {
@@ -44,6 +50,14 @@ namespace Tetris_QMJ.src.Core {
         }
 
         public void HandleInput(float deltaTime) {
+
+            timeGen.UpdateTimer();
+
+            int minutes = (int)(timeGen.Rapidite()/60);
+            if (minutes > lastMinForSpeed){
+                Speed();
+                lastMinForSpeed = minutes;
+            }
             // Incrémentation des timers
             controlIntervalTimer += deltaTime;
 
@@ -118,6 +132,15 @@ namespace Tetris_QMJ.src.Core {
 
             // Réinitialise les délais pour la nouvelle pièce
             controlIntervalTimer = 0f;
+        }
+
+        public void Speed(){
+            if (intervalMove > maxSpeed){
+                intervalMove -= 0.1f;
+                if (intervalMove < maxSpeed){
+                    intervalMove = maxSpeed;
+                }
+            }
         }
     }
 }

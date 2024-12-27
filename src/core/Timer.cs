@@ -31,6 +31,9 @@ namespace Tetris_QMJ.src.Core {
             timeSec = 0;
         }
 
+        public float Rapidite() {
+            return timeSec;
+        }
 
     }
 }
