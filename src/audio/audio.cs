@@ -3,7 +3,14 @@ using Raylib_cs;
 namespace Tetris_QMJ.src.Audio
 {
     public class AudioGame
-    {
+    {   
+        // Useful variable for game music
+
+        public static float volume = 0.5f;
+        private static bool isMusicPlaying = false;
+
+        // Variables for each music/sound in the game --> initialized in the InitAudioGame() function
+
         public static Music musicBackgroundMainMenu1;
         public static Music musicBackgroundMainMenu2;
         public static Sound musicStartButton;
@@ -24,50 +31,28 @@ namespace Tetris_QMJ.src.Audio
             soundClearLineGrid = Raylib.LoadSound("assets/Audio/soundSuccess.wav"); 
         }
 
-        private static bool isMusicPlaying = false;
+        // PlayMusicStream() function streams music continuously; if called while music is already playing, it replaces the current music
 
         public static void PlayMusicStream(Music music)
         {
             if (!isMusicPlaying)
             {
                 Raylib.PlayMusicStream(music);
-                Raylib.SetMusicVolume(music, 1.0f);
+                Raylib.SetMusicVolume(music, volume);
                 isMusicPlaying = true;
             }
             Raylib.UpdateMusicStream(music);
         }
 
+        // PlaySound() function plays a given sound
+
         public static void PlaySound(Sound sound)
         {   
+            Raylib.SetSoundVolume(sound, volume);
             Raylib.PlaySound(sound);
         }
 
-        // public static void PlayMusicOnButton(Music music)
-        // {
-        //     // Arrête la musique actuelle, si nécessaire
-        //     if (Raylib.IsMusicStreamPlaying(music))
-        //     {
-        //         Raylib.StopMusicStream(music);
-        //     }
-
-        //     // Joue la musique
-        //     Raylib.PlayMusicStream(music);
-        //     Raylib.SetMusicVolume(music, 1.0f);
-
-        //     // Met à jour le flux audio pour s'assurer qu'il est bien joué
-        //     while (Raylib.IsMusicStreamPlaying(music))
-        //     {
-        //         Raylib.UpdateMusicStream(music);
-        //     }
-        // }
-
-        // public static void SwitchMusic(Music newMusic)
-        // {
-        //     Raylib.StopMusicStream(musicBackgroundMainMenu1); // Arrête la musique actuelle
-        //     isMusicPlaying = false;
-        //     PlayMusic(newMusic); // Joue la nouvelle musique
-        // }
-
+        // UnloadAudioResources() function deinitializes the variables corresponding to the game's music/sound 
         public static void UnloadAudioResources()
         {
             Raylib.UnloadMusicStream(musicBackgroundMainMenu1);
