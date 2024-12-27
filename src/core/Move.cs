@@ -1,5 +1,6 @@
 using System;
 using Raylib_cs;
+using Tetris_QMJ.src.Audio;
 
 namespace Tetris_QMJ.src.Core {
     public class Move {
@@ -42,12 +43,15 @@ namespace Tetris_QMJ.src.Core {
         // Gère les entrées du joueur
         public void HandleInput() {
             if (Raylib.IsKeyPressed(KeyboardKey.Left)) {
+                AudioGame.PlaySound(AudioGame.soundPieceMove);
                 MoveLeft();
             }
             if (Raylib.IsKeyPressed(KeyboardKey.Right)) {
+                AudioGame.PlaySound(AudioGame.soundPieceMove);
                 MoveRight();
             }
             if (Raylib.IsKeyPressed(KeyboardKey.Down)) {
+                AudioGame.PlaySound(AudioGame.soundPieceMove);
                 MoveDown();
             }
 

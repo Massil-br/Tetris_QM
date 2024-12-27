@@ -29,22 +29,30 @@ namespace Tetris_QMJ.src.Core{
             {
                 int windowHeight = Raylib.GetRenderHeight();
                 int windowWidth = Raylib.GetRenderWidth();
-                if (EntryCode == 0){
+
+                if (EntryCode == 0)
+                {
                     EntryCode = MainMenu.PrintMainMenu(windowWidth, windowHeight, MainMenuFont);
-                    AudioGame.PlayMusic(AudioGame.musicBackgroundMainMenu1);
+                    AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
                 }
-                else if (EntryCode == 1){    
+                else if (EntryCode == 1) 
+                {   
+                    AudioGame.PlaySound(AudioGame.soundButtonMenu);
                     grid = new Grid(gridRows,gridColumns);
-                    EntryCode = GameLoop( grid);
-                    
+                    EntryCode = GameLoop(grid);
                 }
-                else if (EntryCode == 2){
+                else if (EntryCode == 2) 
+                {
                     // Option window logic, if you have any.
+                    AudioGame.PlaySound(AudioGame.soundButtonMenu);
                     Console.WriteLine("PAUUUUSE");
                     EntryCode = 0;  
-                }else if (EntryCode == 99){
-                        Raylib.CloseWindow();
-                        Environment.Exit(0);
+                }
+                else if (EntryCode == 99)
+                {   
+                    AudioGame.PlaySound(AudioGame.soundButtonMenu);
+                    Raylib.CloseWindow();
+                    Environment.Exit(0);
                 }
  
             }
@@ -80,7 +88,7 @@ namespace Tetris_QMJ.src.Core{
                 cellSize = Math.Min(windowWidth / (gridColumns + 2), windowHeight / (gridRows + 2));
                 offsetX = (windowWidth - (gridColumns * cellSize)) / 2;
                 offsetY = (windowHeight - (gridRows * cellSize)) / 2;
-                AudioGame.PlayMusic(AudioGame.musicBackgroundMainMenu1);
+                AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
                 Raylib.BeginDrawing();  // Démarre la phase de dessin
                 Raylib.ClearBackground(Color.Black);  // Efface l'écran en noir
                 

@@ -1,5 +1,6 @@
 using System;
 using Raylib_cs;
+using Tetris_QMJ.src.Audio;
 
 namespace Tetris_QMJ.src.Core {
     public class Rotation {
@@ -19,7 +20,9 @@ namespace Tetris_QMJ.src.Core {
 
         public void HandleInput() {
             // Vérifie si la barre d'espace est pressée
-            if (Raylib.IsKeyPressed(KeyboardKey.Space)) {
+            if (Raylib.IsKeyPressed(KeyboardKey.Space)) 
+            {
+                AudioGame.PlaySound(AudioGame.soundPieceRotate);
                 RotatePiece();
             }
         }
