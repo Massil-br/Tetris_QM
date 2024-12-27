@@ -5,7 +5,6 @@ using Tetris_QMJ.src.Audio;
 namespace Tetris_QMJ.src.Core {
     public class Rotation {
         private Grid grid;
-        private Rotation rotation;
         private Entities.Piece piece;
 
         public Rotation(Grid grid)
@@ -15,7 +14,7 @@ namespace Tetris_QMJ.src.Core {
 
         public Rotation (Grid grid, Rotation rotation){
             this.grid = grid;
-            this.rotation = rotation;
+            
         }
 
         public void HandleInput() {

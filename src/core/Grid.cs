@@ -67,7 +67,7 @@ namespace Tetris_QMJ.src.Core{
             Raylib.EndDrawing();
         }
 
-        public bool AddPiece(Entities.Piece piece)
+        public bool AddPiece(Piece piece)
         {
             for (int i = 0; i < piece.Shape.GetLength(0); i++)
             {
@@ -156,7 +156,7 @@ namespace Tetris_QMJ.src.Core{
             }
         }
 
-        public void Update(Entities.Piece piece){
+        public void Update(Piece piece){
             RemovePiece(piece);
             if (!AddPiece(piece)){
                 throw new InvalidOperationException("Impossible d'ajouter la pièce après rotation.");
@@ -167,7 +167,7 @@ namespace Tetris_QMJ.src.Core{
             return ActivePiece;
         }
 
-        public void SetActivePiece(Entities.Piece piece) {
+        public void SetActivePiece(Piece piece) {
             ActivePiece = piece;
         }
     }
