@@ -128,7 +128,7 @@ namespace Tetris_QMJ.src.Core{
 
                 // Draws the grid and the piece
                 grid.PrintGrid(gridRows, gridColumns, offsetX, offsetY, cellSize);
-                moveHandler.HandleInput();
+                moveHandler.HandleInput(deltaTime);
                 rotateHandler.HandleInput();
 
                 if (Raylib.IsKeyPressed(KeyboardKey.Escape))

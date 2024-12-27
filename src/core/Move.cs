@@ -7,7 +7,13 @@ namespace Tetris_QMJ.src.Core {
         private Grid grid;
         private Entities.Piece piece;
         private float timer;
-        private float intervalMove = 0.8f; 
+        private float intervalMove = 0.8f;
+
+        // Délai pour chaque contrôle utilisateur
+        private float controlIntervalTimer = 0f;
+
+        // Intervalles pour les contrôles utilisateurs
+        private const float controlInterval = 0.1f;
 
         public Move(Grid grid) {
             this.grid = grid;
@@ -33,46 +39,49 @@ namespace Tetris_QMJ.src.Core {
                 grid.SetActivePiece(newPiece);
                 SetPiece(newPiece);
             } else {
-
                 grid.AddPiece(piece);
             }
         }
 
+        public void HandleInput(float deltaTime) {
+            // Incrémentation des timers
+            controlIntervalTimer += deltaTime;
 
-        // Gère les entrées du joueur
-        public void HandleInput() {
-            if (Raylib.IsKeyPressed(KeyboardKey.Left)) {
+            // Déplacement à gauche
+            if (Raylib.IsKeyDown(KeyboardKey.Left) && controlIntervalTimer >= controlInterval) {
                 AudioGame.PlaySound(AudioGame.soundPieceMove);
                 MoveLeft();
-            }
-            if (Raylib.IsKeyPressed(KeyboardKey.Right)) {
-                AudioGame.PlaySound(AudioGame.soundPieceMove);
-                MoveRight();
-            }
-            if (Raylib.IsKeyPressed(KeyboardKey.Down)) {
-                AudioGame.PlaySound(AudioGame.soundPieceMove);
-                MoveDown();
+                controlIntervalTimer = 0f;
             }
 
-            // if (Raylib.IsKeyPressed(KeyboardKey.Up)){
-            //     rotation.RotatePiece();
-            // }
+            // Déplacement à droite
+            if (Raylib.IsKeyDown(KeyboardKey.Right) && controlIntervalTimer >= controlInterval) {
+                AudioGame.PlaySound(AudioGame.soundPieceMove);
+                MoveRight();
+                controlIntervalTimer = 0f;
+            }
+
+            // Déplacement vers le bas
+            if (Raylib.IsKeyDown(KeyboardKey.Down) && controlIntervalTimer >= controlInterval) {
+                AudioGame.PlaySound(AudioGame.soundPieceMove);
+                MoveDown();
+                controlIntervalTimer = 0f;
+            }
         }
 
         public void MoveLeft() {
             if (piece == null) {
                 throw new InvalidOperationException("Piece is null in MoveLeft");
             }
-            if (piece.Y != 0){
+            if (piece.Y != 0) {
                 grid.RemovePiece(piece);
             }
-            
 
             piece.Y -= 1;
 
             if (!grid.AddPiece(piece)) {
                 piece.Y += 1; 
-            }else{
+            } else {
                 grid.AddPiece(piece);
             }
         }
@@ -81,16 +90,15 @@ namespace Tetris_QMJ.src.Core {
             if (piece == null) {
                 throw new InvalidOperationException("Piece is null in MoveRight");
             }
-            // sinon on implémente la position la plus loin a l'horizontale en tant que variable dans le fichier piece.cs et on compare par rapport a cette pos pour si on appelle remove piece ou pas
-            if (piece.Y != grid.GridArray.GetLength(1)-1/* && piece = Z/S/carré || (piece == L T && piece.Y != gridArray.GetLength(1)-3) || (piece == ligne && piece.y != array.getlength(0)-4)          et on change la logique la ligne -> -2 si dans la position de haut en bas , les L array.getlength(1) -2 si position haut vers le bas*/){
+            if (piece.Y != grid.GridArray.GetLength(1) - 1) {
                 grid.RemovePiece(piece);
             }
-            
+
             piece.Y += 1;
 
             if (!grid.AddPiece(piece)) {
                 piece.Y -= 1; 
-            }else{
+            } else {
                 grid.AddPiece(piece);
             }
         }
@@ -107,7 +115,9 @@ namespace Tetris_QMJ.src.Core {
         public void SetPiece(Entities.Piece newPiece) {
             this.piece = newPiece;
             grid.SetActivePiece(newPiece);
-        }
 
+            // Réinitialise les délais pour la nouvelle pièce
+            controlIntervalTimer = 0f;
+        }
     }
 }

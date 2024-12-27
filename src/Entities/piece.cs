@@ -42,13 +42,13 @@ namespace Tetris_QMJ.src.Entities
         {
             return new List<Piece>
             {
-                new Piece(1, 0, 0, new int[,] { { 1, 1, 1, 1 } }), // I
-                new Piece(2, 0, 0, new int[,] { { 1, 1 }, { 1, 1 } }), // O
-                new Piece(3, 0, 0, new int[,] { { 0, 1, 0 }, { 1, 1, 1 } }), // T
-                new Piece(4, 0, 0, new int[,] { { 0, 1, 1 }, { 1, 1, 0 } }), // S
-                new Piece(5, 0, 0, new int[,] { { 1, 1, 0 }, { 0, 1, 1 } }), // Z
-                new Piece(6, 0, 0, new int[,] { { 1, 0, 0 }, { 1, 1, 1 } }), // J
-                new Piece(7, 0, 0, new int[,] { { 0, 0, 1 }, { 1, 1, 1 } })  // L
+                new Piece(1, 0, 3, new int[,] { { 1, 1, 1, 1 } }), // I
+                new Piece(2, 0, 3, new int[,] { { 1, 1 }, { 1, 1 } }), // O
+                new Piece(3, 0, 3, new int[,] { { 0, 1, 0 }, { 1, 1, 1 } }), // T
+                new Piece(4, 0, 3, new int[,] { { 0, 1, 1 }, { 1, 1, 0 } }), // S
+                new Piece(5, 0, 3, new int[,] { { 1, 1, 0 }, { 0, 1, 1 } }), // Z
+                new Piece(6, 0, 3, new int[,] { { 1, 0, 0 }, { 1, 1, 1 } }), // J
+                new Piece(7, 0, 3, new int[,] { { 0, 0, 1 }, { 1, 1, 1 } })  // L
             };
         }
 
