@@ -77,7 +77,6 @@ namespace Tetris_QMJ.src.Core {
 
             // Déplacement vers le bas
             if (Raylib.IsKeyDown(KeyboardKey.Down) && controlIntervalTimer >= controlInterval) {
-                AudioGame.PlaySound(AudioGame.soundPieceMove);
                 MoveDown();
                 controlIntervalTimer = 0f;
             }
