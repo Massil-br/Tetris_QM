@@ -29,7 +29,7 @@ voir la prochaine pièce
 
 nombre de lignes complétées
 
-vitesse de jeu qui s'accélère au fil du temps
+vitesse de jeu qui s'accélère au fil du temps ✅
 
 
 //priorité graphique
