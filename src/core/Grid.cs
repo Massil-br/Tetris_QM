@@ -29,6 +29,7 @@ namespace Tetris_QMJ.src.Core{
         private Piece ActivePiece;
 
         public int[,] GridArray{get;set;}
+        public int LigneComplet{get;set;} = 0;
         private int[,] InitGrid(int width, int heigth) {
             int[,] array = new int[width,heigth];
             for (int i = 0; i < array.GetLength(0); i++) {
@@ -64,6 +65,7 @@ namespace Tetris_QMJ.src.Core{
                     Raylib.DrawRectangleLines(borderX, borderY, cellSize, cellSize, Color.Gray);
                 }
             }
+            Raylib.DrawText($"Lignes complétées : {LigneComplet}", 10, 60, 19, Color.White);
             Raylib.EndDrawing();
         }
 
@@ -121,6 +123,7 @@ namespace Tetris_QMJ.src.Core{
         //ClearFullLines func permet de supprimer une ligne si elle est complete de gauche a droite dans le grid
         public void ClearFullLines()
         {   
+            int nbLigne = 0;
             for (int i = GridArray.GetLength(0) -1 ; i >= 0 ; i--)
             {
                 bool fullLine = true;
@@ -136,6 +139,7 @@ namespace Tetris_QMJ.src.Core{
 
                 if (fullLine)
                 {   
+                    nbLigne++;
                     AudioGame.PlaySound(AudioGame.soundClearLineGrid);
 
                     for (int row = i; row > 0 ; row --)
@@ -154,6 +158,7 @@ namespace Tetris_QMJ.src.Core{
                 }
 
             }
+            LigneComplet += nbLigne;
         }
 
         public void Update(Piece piece){

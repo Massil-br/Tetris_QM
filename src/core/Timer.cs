@@ -20,7 +20,6 @@ namespace Tetris_QMJ.src.Core {
         public void ShowTime(int x, int y, Font font, int fontSize, Color color){
             int min = (int)(timeSec/60);
             int sec = (int)(timeSec%60);
-            //string timeTxt = $"{min:D2}:{sec:D2}";
             string timeTxt= string.Format("{0} : {1}", min, sec);
             
             Raylib.DrawTextEx(font, timeTxt, new System.Numerics.Vector2(x,y), fontSize, 1, color);

@@ -134,6 +134,7 @@ namespace Tetris_QMJ.src.Core {
             controlIntervalTimer = 0f;
         }
 
+        //changement de vitesse minute en minute
         public void Speed(){
             if (intervalMove > maxSpeed){
                 intervalMove -= 0.1f;
