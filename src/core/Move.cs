@@ -6,7 +6,6 @@ namespace Tetris_QMJ.src.Core {
     public class Move {
         private Grid grid;
         private Entities.Piece piece;
-        private Rotation rotation;
         private float timer;
         private float intervalMove = 0.8f; 
 
