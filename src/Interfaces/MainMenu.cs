@@ -27,7 +27,7 @@ namespace Tetris_QMJ.src.Interfaces{
             Raylib.EndDrawing();
             return EntryCode;
         }
-        static void DrawParticlesBackground(int screenWidth, int screenHeight){
+        public static void DrawParticlesBackground(int screenWidth, int screenHeight){
             // variable et condition pour ne pas avoir trop de particules par rapport a la taille de l'écran
             int screenPerimetre = screenHeight*screenWidth;
             if (particles.Count >= screenPerimetre/20000){

@@ -128,6 +128,7 @@ namespace Tetris_QMJ.src.Core{
 
                 // Draws the grid and the piece
                 grid.PrintGrid(gridRows, gridColumns, offsetX, offsetY, cellSize);
+                MainMenu.DrawParticlesBackground(windowWidth, windowHeight);
                 moveHandler.HandleInput(deltaTime);
                 rotateHandler.HandleInput();
 
