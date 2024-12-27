@@ -62,11 +62,11 @@ namespace Tetris_QMJ.src.Core{
         }
 
         public static int GameLoop( Grid grid){
-            int windowHeight= Raylib.GetRenderHeight();
-            int windowWidth = Raylib.GetRenderWidth();
-            int cellSize = Math.Min(windowWidth / (gridColumns + 2), windowHeight / (gridRows + 2));
-            int offsetX = (windowWidth - (gridColumns * cellSize)) / 2;
-            int offsetY = (windowHeight - (gridRows * cellSize)) / 2;
+            int windowHeight; 
+            int windowWidth ;
+            int cellSize ;
+            int offsetX ;
+            int offsetY; 
             
             // Génère une nouvelle pièce aléatoire
             Entities.Piece randomPiece = Entities.PieceFactory.GenerateRandomPiece(1);
