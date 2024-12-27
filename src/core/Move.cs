@@ -63,20 +63,21 @@ namespace Tetris_QMJ.src.Core {
 
             // Déplacement à gauche
             if (Raylib.IsKeyDown(KeyboardKey.Left) && controlIntervalTimer >= controlInterval) {
-                AudioGame.PlaySound(AudioGame.soundPieceMove);
+                // AudioGame.PlaySound(AudioGame.soundPieceMove);
                 MoveLeft();
                 controlIntervalTimer = 0f;
             }
 
             // Déplacement à droite
             if (Raylib.IsKeyDown(KeyboardKey.Right) && controlIntervalTimer >= controlInterval) {
-                AudioGame.PlaySound(AudioGame.soundPieceMove);
+                // AudioGame.PlaySound(AudioGame.soundPieceMove);
                 MoveRight();
                 controlIntervalTimer = 0f;
             }
 
             // Déplacement vers le bas
             if (Raylib.IsKeyDown(KeyboardKey.Down) && controlIntervalTimer >= controlInterval) {
+                // AudioGame.PlaySound(AudioGame.soundPieceMove);
                 MoveDown();
                 controlIntervalTimer = 0f;
             }
