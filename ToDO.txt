@@ -19,7 +19,7 @@ collision avec le sol/ autres pieces ✅
 
 ligne complete s'efface et fait tomber le reste ✅
 
-ajout du score a chaque ligne complete
+ajout du score a chaque ligne complete ✅
 
 timer du temps joué (session) ✅
 
@@ -42,7 +42,7 @@ dessiner les pieces sur le grid ✅
 
 dessiner la prochaine pièce 
 
-dessiner le score
+dessiner le score ✅
 
 dessiner le nombre de lignes complétées ✅
 
