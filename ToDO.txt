@@ -44,9 +44,9 @@ dessiner la prochaine pièce
 
 dessiner le score
 
-dessiner le nombre de lignes complétées 
+dessiner le nombre de lignes complétées ✅
 
-dessiner le temps passé sur la partie
+dessiner le temps passé sur la partie ✅
 
 dessiner le meilleur score réalisé
 

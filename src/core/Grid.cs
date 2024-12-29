@@ -30,6 +30,7 @@ namespace Tetris_QMJ.src.Core{
 
         public int[,] GridArray{get;set;}
         public int LigneComplet{get;set;} = 0;
+        public int Score{get;set;} = 0;
         private int[,] InitGrid(int width, int heigth) {
             int[,] array = new int[width,heigth];
             for (int i = 0; i < array.GetLength(0); i++) {
@@ -66,6 +67,7 @@ namespace Tetris_QMJ.src.Core{
                 }
             }
             Raylib.DrawText($"Lignes complétées : {LigneComplet}", 10, 60, 19, Color.White);
+            Raylib.DrawText($"Score : {Score}", 10, 80, 19, Color.White);
             Raylib.EndDrawing();
         }
 
@@ -158,7 +160,11 @@ namespace Tetris_QMJ.src.Core{
                 }
 
             }
+            //ajoute le nombre de ligne completé
             LigneComplet += nbLigne;
+
+            //ajoute 100 points par ligne complete
+            Score += nbLigne * 100;
         }
 
         public void Update(Piece piece){
