@@ -46,12 +46,14 @@ namespace Tetris_QMJ.src.Core{
                 {
                     EntryCode = MainMenu.PrintMainMenu(windowWidth, windowHeight, MainMenuFont);
                     AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
+                    if (EntryCode == 1){
+                        grid = new Grid(gridRows,gridColumns);
+                    }
                 }
                 // GAME
                 else if (EntryCode == 1) 
                 {   
                     AudioGame.PlaySound(AudioGame.soundButtonMenu);
-                    grid = new Grid(gridRows,gridColumns);
                     EntryCode = GameLoop(grid);
                 }
                 // PAUSE
