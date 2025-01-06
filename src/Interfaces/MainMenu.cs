@@ -143,9 +143,5 @@ namespace Tetris_QMJ.src.Interfaces{
             }
         }
 
-
-
-
-
     }
 }

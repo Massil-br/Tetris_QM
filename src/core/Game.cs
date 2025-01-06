@@ -24,11 +24,11 @@ namespace Tetris_QMJ.src.Core{
         public static void InitWindow()
         {
             
-            Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
-            Raylib.InitWindow(width, height, "Tetris");
+            Raylib.SetConfigFlags(ConfigFlags.ResizableWindow); // pour permettre le resize
+            Raylib.InitWindow(width, height, "Tetris"); // init de la fenêtre
             Raylib.InitAudioDevice();
             AudioGame.InitAudioGame();
-            Raylib.SetTargetFPS(165);
+            Raylib.SetTargetFPS(165); // fps de la fenetre 
             Font MainMenuFont = Raylib.LoadFont("assets/font/Team 401.ttf");
             MainMenu.InitButtonTextures();
             Raylib.SetExitKey(KeyboardKey.Null);
