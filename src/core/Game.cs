@@ -59,17 +59,23 @@ namespace Tetris_QMJ.src.Core{
                 // PAUSE
                 else if (EntryCode == 2) 
                 {
-                    // Option window logic, if you have any.
                     AudioGame.PlaySound(AudioGame.soundButtonMenu);
                     Console.WriteLine("PAUUUUSE");
                     EntryCode = 0;  
+                }
+                else if (EntryCode == 3){
+                    //OPTIONS MENU
+                    Console.WriteLine("option menuuuuu");
+                    EntryCode = 0;
+                    
+                    
                 }
                 // CLOSE WINDOW
                 else if (EntryCode == 99)
                 {   
                     AudioGame.PlaySound(AudioGame.soundButtonMenu);
                     Raylib.CloseWindow();
-                    Environment.Exit(0);
+                    break;
                 }
             }
             // Unloads different variables

@@ -134,7 +134,7 @@ namespace Tetris_QMJ.src.Interfaces{
                 return 1; // code 1 = gameloop dans la main loop
             }
             else if (Raylib.CheckCollisionPointRec(mousePosition, new Rectangle(startXOptions, optionsButtonY, scaledButtonWidthOptions, scaledButtonHeightOptions)) && Raylib.IsMouseButtonPressed(MouseButton.Left)){
-                return 2; // code 2 menu options dans la main loop
+                return 3; // code 3 menu options dans la main loop
             }
             else if (Raylib.CheckCollisionPointRec(mousePosition, new Rectangle(startXQuit, quitButtonY, scaledButtonWidthQuit, scaledButtonHeightQuit)) && Raylib.IsMouseButtonPressed(MouseButton.Left)){
                 return 99; // code 99 = quitter le jeu dans la main loop
