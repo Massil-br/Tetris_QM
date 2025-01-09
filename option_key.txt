@@ -1,4 +1,0 @@
-MoveLeft:C
-MoveRight:W
-MoveDown:S
-Rotate:C

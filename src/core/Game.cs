@@ -67,8 +67,7 @@ namespace Tetris_QMJ.src.Core{
                     EntryCode = 0;  
                 }
                 else if (EntryCode == 3){
-                    //OPTIONS MENU
-                    AudioGame.PlaySound(AudioGame.soundButtonMenu);
+                    //OPTIONS MENU;
                     Console.WriteLine("option menuuuuu");
                     EntryCode = ShowOptionsMenu(options);
                     options.SaveKey();

@@ -8,7 +8,7 @@ namespace Tetris_QMJ.src.Core
 {
     public class Options
     {
-        private const string FilePath = "option_key.txt";
+        private const string FilePath = "./src/Interfaces/option_key.txt";
         public Dictionary<string, KeyboardKey> KeyBindings { get; private set; }
 
         public Options(){
