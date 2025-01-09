@@ -27,6 +27,7 @@ namespace Tetris_QMJ.src.Core{
             { 7, Orange }   // Pièce L
         };
         private Piece ActivePiece;
+        private Piece NextPiece;
 
         public int[,] GridArray{get;set;}
         public int LigneComplet{get;set;} = 0;
@@ -68,6 +69,7 @@ namespace Tetris_QMJ.src.Core{
             }
             Raylib.DrawText($"Lignes complétées : {LigneComplet}", 10, 60, 19, Color.White);
             Raylib.DrawText($"Score : {Score}", 10, 80, 19, Color.White);
+            Raylib.DrawText("Prochaine pièce :", offsetX + (gridColumns * cellSize) + 20, offsetY, 19, Color.White);
             Raylib.EndDrawing();
         }
 
@@ -180,6 +182,10 @@ namespace Tetris_QMJ.src.Core{
 
         public void SetActivePiece(Piece piece) {
             ActivePiece = piece;
+        }
+
+        public void SetNextPiece(Piece piece) {
+            NextPiece = piece;
         }
     }
 }

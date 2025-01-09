@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using Raylib_cs;
 using Tetris_QMJ.src.Audio;
@@ -18,6 +19,8 @@ namespace Tetris_QMJ.src.Core{
         const int gridColumns = 10;
         const int gridRows = 20;
         static  Grid grid = new(gridRows,gridColumns);
+        static Options options = new Options();
+        
 
         // The InitWindow() function first calls all functions that initialize different variables needed for the program
         // and then contains the main game loop
@@ -65,10 +68,10 @@ namespace Tetris_QMJ.src.Core{
                 }
                 else if (EntryCode == 3){
                     //OPTIONS MENU
+                    AudioGame.PlaySound(AudioGame.soundButtonMenu);
                     Console.WriteLine("option menuuuuu");
-                    EntryCode = 0;
-                    
-                    
+                    EntryCode = ShowOptionsMenu(options);
+                    options.SaveKey();
                 }
                 // CLOSE WINDOW
                 else if (EntryCode == 99)
@@ -146,7 +149,85 @@ namespace Tetris_QMJ.src.Core{
                 }
             }
             return 99;
-        }          
+        }
+
+        public static int ShowOptionsMenu(Options options)
+        {
+            // Liste des actions pour lesquelles on peut configurer les touches
+            var actions = options.KeyBindings.Keys.ToList();
+            int selectedIndex = 0; // Indice de l'action actuellement sélectionnée
+            bool inOptionsMenu = true; // Contrôle pour rester ou quitter le menu des options
+
+            while (inOptionsMenu && !Raylib.WindowShouldClose())
+            {
+                // Détection des touches pour naviguer dans le menu
+                if (Raylib.IsKeyPressed(KeyboardKey.Down))
+                {
+                    selectedIndex = (selectedIndex + 1) % actions.Count;
+                }
+                else if (Raylib.IsKeyPressed(KeyboardKey.Up))
+                {
+                    selectedIndex = (selectedIndex - 1 + actions.Count) % actions.Count;
+                }
+                else if (Raylib.IsKeyPressed(KeyboardKey.Enter))
+                {
+                    // Permet de modifier la touche pour l'action sélectionnée
+                    string action = actions[selectedIndex];
+                    SetNewKeyForAction(options, action);
+                }
+                else if (Raylib.IsKeyPressed(KeyboardKey.Escape))
+                {
+                    // Quitte le menu des options
+                    inOptionsMenu = false;
+                    return 0;
+                }
+
+                // Affichage du menu des options
+                Raylib.BeginDrawing();
+                Raylib.ClearBackground(Color.DarkGray);
+
+                Raylib.DrawText("Options Menu - Press ESCAPE to Exit", 10, 10, 20, Color.White);
+
+                // Affiche chaque action et met en surbrillance celle sélectionnée
+                for (int i = 0; i < actions.Count; i++)
+                {
+                    Color textColor = (i == selectedIndex) ? Color.Yellow : Color.White;
+                    Raylib.DrawText($"{actions[i]}: {options.KeyBindings[actions[i]]}",
+                                    50, 50 + i * 30, 20, textColor);
+                }
+
+                Raylib.EndDrawing();
+            }
+            return 0;
+        }
+
+        private static void SetNewKeyForAction(Options options, string action)
+        {
+            bool waitingForKey = true;
+
+            while (waitingForKey && !Raylib.WindowShouldClose())
+            {
+                Raylib.BeginDrawing();
+                Raylib.ClearBackground(Color.Black);
+
+                Raylib.DrawText($"Press a key to set for {action}", 10, 10, 20, Color.White);
+                Raylib.EndDrawing();
+
+                // Vérifie si une touche est pressée
+                foreach (KeyboardKey key in Enum.GetValues(typeof(KeyboardKey)))
+                {
+                    if (Raylib.IsKeyPressed(key))
+                    {
+                        // Met à jour la touche pour l'action spécifiée
+                        options.SetKey(action, key);
+                        waitingForKey = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+       
     }
 }
 

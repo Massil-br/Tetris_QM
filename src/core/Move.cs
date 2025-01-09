@@ -5,6 +5,7 @@ using Tetris_QMJ.src.Audio;
 namespace Tetris_QMJ.src.Core {
     public class Move {
         private Grid grid;
+        Options options = new Options();
         private Entities.Piece piece;
         private float timer;
         private float intervalMove = 0.8f;
@@ -62,21 +63,21 @@ namespace Tetris_QMJ.src.Core {
             controlIntervalTimer += deltaTime;
 
             // Déplacement à gauche
-            if (Raylib.IsKeyDown(KeyboardKey.Left) && controlIntervalTimer >= controlInterval) {
+            if (Raylib.IsKeyDown(options.KeyBindings["MoveLeft"]) && controlIntervalTimer >= controlInterval) {
                 // AudioGame.PlaySound(AudioGame.soundPieceMove);
                 MoveLeft();
                 controlIntervalTimer = 0f;
             }
 
             // Déplacement à droite
-            if (Raylib.IsKeyDown(KeyboardKey.Right) && controlIntervalTimer >= controlInterval) {
+            if (Raylib.IsKeyDown(options.KeyBindings["MoveRight"]) && controlIntervalTimer >= controlInterval) {
                 // AudioGame.PlaySound(AudioGame.soundPieceMove);
                 MoveRight();
                 controlIntervalTimer = 0f;
             }
 
             // Déplacement vers le bas
-            if (Raylib.IsKeyDown(KeyboardKey.Down) && controlIntervalTimer >= controlInterval) {
+            if (Raylib.IsKeyDown(options.KeyBindings["MoveDown"]) && controlIntervalTimer >= controlInterval) {
                 // AudioGame.PlaySound(AudioGame.soundPieceMove);
                 MoveDown();
                 controlIntervalTimer = 0f;

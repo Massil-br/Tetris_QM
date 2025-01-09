@@ -5,6 +5,7 @@ using Tetris_QMJ.src.Audio;
 namespace Tetris_QMJ.src.Core {
     public class Rotation {
         private Grid grid;
+        Options options = new Options();
         private Entities.Piece piece;
 
         public Rotation(Grid grid)
@@ -19,7 +20,7 @@ namespace Tetris_QMJ.src.Core {
 
         public void HandleInput() {
             // Vérifie si la barre d'espace est pressée
-            if (Raylib.IsKeyPressed(KeyboardKey.Space)) 
+            if (Raylib.IsKeyPressed(options.KeyBindings["Rotate"])) 
             {
                 AudioGame.PlaySound(AudioGame.soundPieceRotate);
                 RotatePiece();

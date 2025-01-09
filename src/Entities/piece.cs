@@ -32,6 +32,7 @@ namespace Tetris_QMJ.src.Entities
             }
             Shape = rotate;
         }
+
     }
 
     public static class PieceFactory
