@@ -154,8 +154,8 @@ namespace Tetris_QMJ.src.Core{
         {
             // Liste des actions pour lesquelles on peut configurer les touches
             var actions = options.KeyBindings.Keys.ToList();
-            int selectedIndex = 0; // Indice de l'action actuellement sélectionnée
-            bool inOptionsMenu = true; // Contrôle pour rester ou quitter le menu des options
+            int selectedIndex = 0;
+            bool inOptionsMenu = true;
 
             while (inOptionsMenu && !Raylib.WindowShouldClose())
             {
@@ -176,18 +176,15 @@ namespace Tetris_QMJ.src.Core{
                 }
                 else if (Raylib.IsKeyPressed(KeyboardKey.Escape))
                 {
-                    // Quitte le menu des options
                     inOptionsMenu = false;
                     return 0;
                 }
 
-                // Affichage du menu des options
                 Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.DarkGray);
+                Raylib.ClearBackground(Color.Black);
 
-                Raylib.DrawText("Options Menu - Press ESCAPE to Exit", 10, 10, 20, Color.White);
+                Raylib.DrawText("Options Menu - Press ESCAPE to Exit", 200, 10, 20, Color.White);
 
-                // Affiche chaque action et met en surbrillance celle sélectionnée
                 for (int i = 0; i < actions.Count; i++)
                 {
                     Color textColor = (i == selectedIndex) ? Color.Yellow : Color.White;
@@ -195,6 +192,7 @@ namespace Tetris_QMJ.src.Core{
                                     50, 50 + i * 30, 20, textColor);
                 }
 
+                MainMenu.DrawParticlesBackground(Raylib.GetRenderWidth(), Raylib.GetRenderHeight());
                 Raylib.EndDrawing();
             }
             return 0;
@@ -209,7 +207,7 @@ namespace Tetris_QMJ.src.Core{
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.Black);
 
-                Raylib.DrawText($"Press a key to set for {action}", 10, 10, 20, Color.White);
+                Raylib.DrawText($"Press a key for {action}", 260, 250, 20, Color.White);
                 Raylib.EndDrawing();
 
                 // Vérifie si une touche est pressée

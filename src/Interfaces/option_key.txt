@@ -1,4 +1,4 @@
-MoveLeft:Left
+MoveLeft:Escape
 MoveRight:Right
 MoveDown:Down
 Rotate:Space
