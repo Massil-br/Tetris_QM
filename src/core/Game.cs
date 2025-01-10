@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Raylib_cs;
 using Tetris_QMJ.src.Audio;
+using Tetris_QMJ.src.Entities;
 using Tetris_QMJ.src.Interfaces;
 
 
@@ -94,13 +95,18 @@ namespace Tetris_QMJ.src.Core{
             int offsetY; 
             
             // Generates a new random piece
-            Entities.Piece randomPiece = Entities.PieceFactory.GenerateRandomPiece(1);
-            grid.AddPiece(randomPiece);
-            grid.SetActivePiece(randomPiece);
+            Piece randomNextPiece = PieceFactory.GenerateRandomPiece(1);
+
+            grid.NextPiece = randomNextPiece;
+
+            grid.ActivePiece = grid.NextPiece;
+
+            grid.AddPiece(grid.ActivePiece);
+            grid.SetActivePiece(grid.ActivePiece);
 
             Rotation rotateHandler = new Rotation(grid);
             Move moveHandler = new Move(grid);
-            moveHandler.SetPiece(randomPiece);
+            moveHandler.SetPiece(grid.ActivePiece);
             
             Timer timer = new Timer();
             Font font = Raylib.LoadFont("assets/font/College Squad Regular.ttf");
@@ -128,16 +134,17 @@ namespace Tetris_QMJ.src.Core{
                 timer.ShowTime(10, 10, font, 40, Color.White);
 
                 // Handles new pieces
-                if (!grid.GetPiece().IsActive) 
-                {
-                    Entities.Piece newPiece = Entities.PieceFactory.GenerateRandomPiece(1);
-                    grid.AddPiece(newPiece);
-                    grid.SetActivePiece(newPiece);
-                    moveHandler.SetPiece(newPiece);
-                }
+                // 
+                // if (!grid.GetPiece().IsActive) 
+                // {
+                //     Entities.Piece newPiece = Entities.PieceFactory.GenerateRandomPiece(1);
+                //     grid.AddPiece(newPiece);
+                //     grid.SetActivePiece(newPiece);
+                //     moveHandler.SetPiece(newPiece);
+                // }
 
                 // Draws the grid and the piece
-                grid.PrintGrid(gridRows, gridColumns, offsetX, offsetY, cellSize);
+                grid.PrintGrid(gridRows, gridColumns, offsetX, offsetY, cellSize, grid.NextPiece);
                 MainMenu.DrawParticlesBackground(windowWidth, windowHeight);
                 moveHandler.HandleInput(deltaTime);
                 rotateHandler.HandleInput();

@@ -26,8 +26,8 @@ namespace Tetris_QMJ.src.Core{
             { 6, Blue },    // Pièce J
             { 7, Orange }   // Pièce L
         };
-        private Piece ActivePiece;
-        private Piece NextPiece;
+        public Piece ActivePiece;
+        public Piece NextPiece;
 
         public int[,] GridArray{get;set;}
         public int LigneComplet{get;set;} = 0;
@@ -46,7 +46,7 @@ namespace Tetris_QMJ.src.Core{
             GridArray = InitGrid(heigth,width);
         }
 
-        public void PrintGrid(int gridRows, int gridColumns, int offsetX, int offsetY, int cellSize){
+        public void PrintGrid(int gridRows, int gridColumns, int offsetX, int offsetY, int cellSize, Piece nextPiece){
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.Black);
             for (int row = 0; row < gridRows; row++){
@@ -70,7 +70,18 @@ namespace Tetris_QMJ.src.Core{
             Raylib.DrawText($"Lignes complétées : {LigneComplet}", 10, 60, 19, Color.White);
             Raylib.DrawText($"Score : {Score}", 10, 80, 19, Color.White);
             Raylib.DrawText("Prochaine pièce :", offsetX + (gridColumns * cellSize) + 20, offsetY, 19, Color.White);
-            Raylib.EndDrawing();
+
+            // Dessine un cadre pour la prochaine pièce
+            int previewX = offsetX + (gridColumns * cellSize) + 40;  // Décalage à droite de la grille
+            int previewY = offsetY + 30;  // Ajuste la hauteur
+
+            // Dessine le cadre autour de la zone de la prochaine pièce
+            Raylib.DrawRectangleLines(previewX - 10, previewY - 10, cellSize * 4, cellSize * 4, Color.White);
+
+            // Affiche la prochaine pièce bien centrée avec la bonne couleur
+            DrawNextPiece(nextPiece, previewX, previewY, cellSize);
+
+            Raylib.EndDrawing();    
         }
 
         public bool AddPiece(Piece piece)
@@ -187,5 +198,43 @@ namespace Tetris_QMJ.src.Core{
         public void SetNextPiece(Piece piece) {
             NextPiece = piece;
         }
+
+        void DrawNextPiece(Piece nextPiece, int previewX, int previewY, int cellSize)
+        {
+            int[,] shape = nextPiece.Shape; 
+            int rows = shape.GetLength(0);
+            int cols = shape.GetLength(1);
+
+            // Récupère la couleur de la pièce en fonction de son ID
+            Color pieceColor = pieceColors.ContainsKey(nextPiece.Id) ? pieceColors[nextPiece.Id] : Color.White;
+
+            // Calcul pour centrer la pièce dans la zone de prévisualisation
+            int startX = previewX + (2 * cellSize) - ((cols * cellSize) / 2); // Centre horizontalement
+            int startY = previewY + (2 * cellSize) - ((rows * cellSize) / 2); // Centre verticalement
+
+            // Dessine chaque bloc de la pièce avec la bonne couleur
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    if (shape[row, col] == 1)
+                    {
+                        Raylib.DrawRectangle(
+                            startX + (col * cellSize),
+                            startY + (row * cellSize),
+                            cellSize, cellSize,
+                            pieceColor
+                        );
+                        Raylib.DrawRectangleLines(
+                            startX + (col * cellSize),
+                            startY + (row * cellSize),
+                            cellSize, cellSize,
+                            Color.Black
+                        );
+                    }
+                }
+            }
+        }
+
     }
 }
