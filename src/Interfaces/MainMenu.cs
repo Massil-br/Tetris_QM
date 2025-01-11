@@ -9,6 +9,7 @@ namespace Tetris_QMJ.src.Interfaces{
         static Texture2D playButtonTexture;
         static Texture2D optionsButtonTexture;
         static Texture2D quitButtonTexture;
+        static string username = "";
 
         public static void InitButtonTextures(){
             // Charger les textures des boutons
@@ -25,6 +26,19 @@ namespace Tetris_QMJ.src.Interfaces{
             PrintTetrisOnTop(screenWidth, screenHeight, font);
             EntryCode = DrawButtons(screenWidth, screenHeight);
             Raylib.EndDrawing();
+
+            if (EntryCode == 1)
+            {
+                username = GetUsername(screenWidth, screenHeight, font);
+                if (!string.IsNullOrEmpty(username))
+                {
+                    return 1;
+                }
+                else
+                {
+                    EntryCode = 0; 
+                }
+            }
             return EntryCode;
         }
         public static void DrawParticlesBackground(int screenWidth, int screenHeight){
@@ -141,6 +155,67 @@ namespace Tetris_QMJ.src.Interfaces{
             }else {
                 return 0; // code 0 = main menu donc relance la loop au dessus
             }
+        }
+
+        public static string GetUsername(int screenWidth, int screenHeight, Font font)
+        {
+            string username = "";
+            bool enterPressed = false;
+
+            while (!enterPressed && !Raylib.WindowShouldClose())
+            {
+                Raylib.BeginDrawing();
+                Raylib.ClearBackground(Color.Black);
+
+                Raylib.DrawText("Enter your username:", screenWidth / 2 - 100, screenHeight / 2 - 50, 20, Color.White);
+                Raylib.DrawText(username, screenWidth / 2 - 100, screenHeight / 2, 20, Color.White);
+
+                Raylib.EndDrawing();
+
+                int key = Raylib.GetKeyPressed();
+                if (key > 0)
+                {
+                    if (key == (int)KeyboardKey.Backspace && username.Length > 0)
+                    {
+                        username = username.Substring(0, username.Length - 1);
+                    }
+                    else if (key == (int)KeyboardKey.Enter)
+                    {
+                        enterPressed = true;
+                    }
+                    else if (key >= 32 && key <= 126) // Printable ASCII characters
+                    {
+                        username += MapAzertyKey((char)key);
+                    }
+                }
+            }
+            return username;
+        }
+
+        private static char MapAzertyKey(char key)
+        {
+            // Dictionnaire pour mapper les caractères AZERTY vers leur équivalent
+            Dictionary<char, char> azertyMap = new Dictionary<char, char>
+            {
+                { 'q', 'a' }, { 'a', 'q' },
+                { 'z', 'w' }, { 'w', 'z' },
+                { 'm', ',' }, { ',', 'm' },
+                { 'Q', 'A' }, { 'A', 'Q' },
+                { 'Z', 'W' }, { 'W', 'Z' },
+                { 'M', '?' }, { '?', 'M' },
+                { '&', '1' }, { 'é', '2' }, { '"', '3' }, { '\'', '4' },
+                { '(', '5' }, { '-', '6' }, { 'è', '7' }, { '_', '8' },
+                { 'ç', '9' }, { 'à', '0' }
+            };
+
+            // Vérifier si la touche existe dans le mappage
+            if (azertyMap.ContainsKey(key))
+            {
+                return azertyMap[key];
+            }
+
+            // Si aucune correspondance, retourner la touche originale
+            return key;
         }
 
     }

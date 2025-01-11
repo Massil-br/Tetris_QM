@@ -231,6 +231,41 @@ namespace Tetris_QMJ.src.Core{
             }
         }
 
+        public static string GetUsername(int screenWidth, int screenHeight, Font font)
+        {
+            string username = "";
+            bool enterPressed = false;
+
+            while (!enterPressed && !Raylib.WindowShouldClose())
+            {
+                Raylib.BeginDrawing();
+                Raylib.ClearBackground(Color.Black);
+
+                Raylib.DrawText("Enter your username:", screenWidth / 2 - 100, screenHeight / 2 - 50, 20, Color.White);
+                Raylib.DrawText(username, screenWidth / 2 - 100, screenHeight / 2, 20, Color.White);
+
+                Raylib.EndDrawing();
+
+                int key = Raylib.GetKeyPressed();
+                if (key > 0)
+                {
+                    if (key == (int)KeyboardKey.Space && username.Length > 0)
+                    {
+                        username = username.Substring(0, username.Length - 1);
+                    }
+                    else if (key == (int)KeyboardKey.Enter)
+                    {
+                        enterPressed = true;
+                    }
+                    else if (key >= 32 && key <= 126) // Printable ASCII characters
+                    {
+                        username += (char)key;
+                    }
+                }
+            }
+
+            return username;
+        }
        
     }
 }
