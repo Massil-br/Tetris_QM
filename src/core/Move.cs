@@ -41,10 +41,9 @@ namespace Tetris_QMJ.src.Core {
                 grid.AddPiece(piece);
                 piece.IsActive = false;
                 grid.ClearFullLines();
-                Entities.Piece ActivePiece = Entities.PieceFactory.GenerateRandomPiece(grid.GridArray.GetLength(1));
-                grid.AddPiece(ActivePiece);
-                grid.SetActivePiece(ActivePiece);
-                SetPiece(ActivePiece);
+                grid.ActivePiece = grid.NextPiece;
+                grid.NextPiece = Entities.PieceFactory.GenerateRandomPiece(grid.GridArray.GetLength(1));
+                SetPiece(grid.ActivePiece);
             } else {
                 grid.AddPiece(piece);
             }
