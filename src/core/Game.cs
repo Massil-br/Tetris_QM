@@ -41,6 +41,7 @@ namespace Tetris_QMJ.src.Core
             {
                 int windowHeight = Raylib.GetRenderHeight();
                 int windowWidth = Raylib.GetRenderWidth();
+                
 
                 // MENU
                 if (EntryCode == 0)

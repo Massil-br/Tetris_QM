@@ -202,7 +202,7 @@ namespace Tetris_QMJ.src.Interfaces
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.Black);
 
-                Raylib.DrawText("Enter your username:", screenWidth / 2 - 100, screenHeight / 2 - 50, 20, Color.White);
+                Raylib.DrawText("Enter your username and press enter twice:", screenWidth / 2 - 220, screenHeight / 2 - 50, 20, Color.White);
                 Raylib.DrawText(username, screenWidth / 2 - 100, screenHeight / 2, 20, Color.White);
 
                 Raylib.EndDrawing();
