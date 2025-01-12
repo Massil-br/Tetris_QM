@@ -77,7 +77,7 @@ namespace Tetris_QMJ.src.Core
                 else if (EntryCode == 4)
                 {
                     // Leaderboard
-                    AudioGame.PlaySound(AudioGame.soundButtonMenu);
+                    AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
                     EntryCode = leaderboard.Display(windowWidth, windowHeight, MainMenuFont);
                     
                 }
