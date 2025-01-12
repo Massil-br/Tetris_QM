@@ -12,11 +12,13 @@ namespace Tetris_QMJ.src.Core {
             time = Environment.TickCount;
         }
 
+        //permet de mettre à jour le timer en fonction du temps écoulé
         public void UpdateTimer(){
             int currentTime = Environment.TickCount;
             timeSec = (currentTime - time)/1000.0f;
         }
 
+        //permet d'afficher le temps en minutes et second sur l'écran
         public void ShowTime(int x, int y, Font font, int fontSize, Color color){
             int min = (int)(timeSec/60);
             int sec = (int)(timeSec%60);
@@ -25,11 +27,13 @@ namespace Tetris_QMJ.src.Core {
             Raylib.DrawTextEx(font, timeTxt, new System.Numerics.Vector2(x,y), fontSize, 1, color);
         }
 
+        //permet de réinitialiser le temps à 0
         public void ResetTime(){
             time = Environment.TickCount;
             timeSec = 0;
         }
 
+        //permet de retourner le temps en secondes
         public float Rapidite() {
             return timeSec;
         }

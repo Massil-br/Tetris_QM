@@ -41,10 +41,10 @@ namespace Tetris_QMJ.src.Core {
                 grid.AddPiece(piece);
                 piece.IsActive = false;
                 grid.ClearFullLines();
-                Entities.Piece newPiece = Entities.PieceFactory.GenerateRandomPiece(grid.GridArray.GetLength(1));
-                grid.AddPiece(newPiece);
-                grid.SetActivePiece(newPiece);
-                SetPiece(newPiece);
+                Entities.Piece ActivePiece = Entities.PieceFactory.GenerateRandomPiece(grid.GridArray.GetLength(1));
+                grid.AddPiece(ActivePiece);
+                grid.SetActivePiece(ActivePiece);
+                SetPiece(ActivePiece);
             } else {
                 grid.AddPiece(piece);
             }
@@ -127,9 +127,9 @@ namespace Tetris_QMJ.src.Core {
             }
         }
 
-        public void SetPiece(Entities.Piece newPiece) {
-            this.piece = newPiece;
-            grid.SetActivePiece(newPiece);
+        public void SetPiece(Entities.Piece ActivePiece) {
+            this.piece = ActivePiece;
+            grid.SetActivePiece(ActivePiece);
 
             // Réinitialise les délais pour la nouvelle pièce
             controlIntervalTimer = 0f;

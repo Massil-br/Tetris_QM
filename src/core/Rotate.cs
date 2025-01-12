@@ -19,7 +19,7 @@ namespace Tetris_QMJ.src.Core {
         }
 
         public void HandleInput() {
-            // Vérifie si la barre d'espace est pressée
+            // Vérifie si la touche de rotation est pressée
             if (Raylib.IsKeyPressed(options.KeyBindings["Rotate"])) 
             {
                 AudioGame.PlaySound(AudioGame.soundPieceRotate);
@@ -27,9 +27,11 @@ namespace Tetris_QMJ.src.Core {
             }
         }
 
+        //permet de faire la rotation de la pièce
         public void RotatePiece() {
             piece = grid.GetPiece();
 
+            // vérifie si la pièce est active et la retire de la grille pour la tourner puis la remet dans la grille
             if (piece != null && piece.IsActive) { 
                 grid.RemovePiece(piece); 
                 piece.Rotation90();

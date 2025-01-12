@@ -16,6 +16,7 @@ namespace Tetris_QMJ.src.Core
             LoadKey();
         }
 
+        //Permet de charger les touches du fichier qui se trouve dans le fichier option_key.txt
         public void LoadKey(){
             if (!File.Exists(FilePath))
             {
@@ -40,6 +41,7 @@ namespace Tetris_QMJ.src.Core
             }
         }
 
+        //Permet de sauvegarder les touches dans le fichier
         public void SaveKey(){
             List<string> lines = new List<string>();
             foreach (var key in KeyBindings)
@@ -49,6 +51,7 @@ namespace Tetris_QMJ.src.Core
             File.WriteAllLines(FilePath, lines);
         }
 
+        //Permet de changer une touche
         public void SetKey(string action, KeyboardKey key){
             if (KeyBindings.ContainsKey(action))
             {
