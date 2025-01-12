@@ -77,6 +77,12 @@ namespace Tetris_QMJ.src.Core
                     leaderboard.Display(windowWidth, windowHeight, MainMenuFont);
                     EntryCode = 4;
                 }
+                else if (EntryCode == 5)
+                {
+                    // GAME OVER
+                    // AudioGame.PlayMusicStream(AudioGame.musicBackgroundGameOver);
+                    EntryCode = GameOver.PrintGameOver(windowWidth, windowHeight, MainMenuFont, grid.Score);
+                }
 
                 // CLOSE WINDOW
                 else if (EntryCode == 99)
@@ -143,6 +149,11 @@ namespace Tetris_QMJ.src.Core
                 MainMenu.DrawParticlesBackground(windowWidth, windowHeight);
                 moveHandler.HandleInput(deltaTime);
                 rotateHandler.HandleInput();
+
+                if (grid.IsSpawnPositionFree() == false)
+                {
+                    return 5;
+                }
 
                 if (Raylib.IsKeyPressed(KeyboardKey.Escape))
                 {

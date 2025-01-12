@@ -84,7 +84,6 @@ namespace Tetris_QMJ.src.Core{
             Raylib.EndDrawing();    
         }
 
-        //ajoute une piece a la grille et verifie si elle est en collision avec une autre piece
         public bool AddPiece(Piece piece)
         {
             for (int i = 0; i < piece.Shape.GetLength(0); i++)
@@ -153,7 +152,6 @@ namespace Tetris_QMJ.src.Core{
                     }
                 }
 
-                //si la ligne est complete on supprime la ligne et on decale les lignes du dessus vers le bas
                 if (fullLine)
                 {   
                     nbLigne++;
@@ -182,22 +180,25 @@ namespace Tetris_QMJ.src.Core{
             Score += nbLigne * 100;
         }
 
-        //retourne la piece active dans la grille
+        public void Update(Piece piece){
+            RemovePiece(piece);
+            if (!AddPiece(piece)){
+                throw new InvalidOperationException("Impossible d'ajouter la pièce après rotation.");
+            }
+        }
+
         public Entities.Piece GetPiece() {
             return ActivePiece;
         }
 
-        //definit une nouvelle piece comme etant la piece active
         public void SetActivePiece(Piece piece) {
             ActivePiece = piece;
         }
 
-        //definit la prochaine piece
         public void SetNextPiece(Piece piece) {
             NextPiece = piece;
         }
 
-        //dessine la prochaine piece
         void DrawNextPiece(Piece nextPiece, int previewX, int previewY, int cellSize)
         {
             int[,] shape = nextPiece.Shape; 
@@ -235,5 +236,22 @@ namespace Tetris_QMJ.src.Core{
             }
         }
 
+        public bool IsSpawnPositionFree()
+        {
+            int middleColumnStart = GridArray.GetLength(1) / 2 - 1; // Calculer la colonne du milieu
+            int middleColumnEnd = GridArray.GetLength(1) / 2 + 1;
+
+            RemovePiece(ActivePiece);
+
+            for (int col = middleColumnStart; col <= middleColumnEnd; col++)
+            {
+                if (GridArray[1, col] != 0)
+                {
+                    return false;
+                }
+            }
+            AddPiece(ActivePiece);
+            return true;
+        }
     }
 }
