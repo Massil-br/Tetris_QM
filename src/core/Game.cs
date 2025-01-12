@@ -20,7 +20,7 @@ namespace Tetris_QMJ.src.Core
         static Grid grid = new(gridRows, gridColumns);
         static Options options = new Options();
         static Leaderboard leaderboard = new Leaderboard();
-        private static string username;
+        
 
         // The InitWindow() function first calls all functions that initialize different variables needed for the program
         // and then contains the main game loop
@@ -50,7 +50,7 @@ namespace Tetris_QMJ.src.Core
                     if (EntryCode == 1)
                     {
                         grid = new Grid(gridRows, gridColumns);
-                        username = MainMenu.GetUsername(windowWidth, windowHeight, MainMenuFont);
+                        MainMenu.username = MainMenu.GetUsername(windowWidth, windowHeight, MainMenuFont);
                     }
                 }
                 // GAME
@@ -156,7 +156,8 @@ namespace Tetris_QMJ.src.Core
 
                 if (grid.IsSpawnPositionFree() == false)
                 {
-                    leaderboard.AddScore(username, grid.Score);
+                    leaderboard.AddScore(MainMenu.username, grid.Score);
+                    MainMenu.username = "";
                     return 5;
                 }
 

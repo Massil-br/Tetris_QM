@@ -13,7 +13,7 @@ namespace Tetris_QMJ.src.Interfaces
         static Texture2D leaderButtonTexture;
         static Texture2D optionsButtonTexture;
         static Texture2D quitButtonTexture;
-        static string username = "";
+        public static string username = "";
 
         public static void InitButtonTextures()
         {
