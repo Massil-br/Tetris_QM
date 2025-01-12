@@ -2,6 +2,8 @@ using Raylib_cs;
 using System.Numerics;
 using Tetris_QMJ.src.Entities;
 using System.Collections.Generic;
+using Tetris_QMJ.src.Core;
+using System;
 
 namespace Tetris_QMJ.src.Interfaces
 {
@@ -18,7 +20,7 @@ namespace Tetris_QMJ.src.Interfaces
             mainMenuButtonTexture = Raylib.LoadTexture("assets/Buttons/MainMenuButton.png");
         }
 
-        public static int PrintGameOver(int screenWidth, int screenHeight, Font font, int score)
+        public static int PrintGameOver(int screenWidth, int screenHeight, Font font, string username, int score, Leaderboard leaderboard)
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.Black);
@@ -36,6 +38,8 @@ namespace Tetris_QMJ.src.Interfaces
             Raylib.DrawTextEx(font, scoreText, new Vector2((screenWidth - scoreSize.X) / 2, screenHeight / 4 + textSize.Y + 20), 30, 1, Color.White);
 
             Raylib.EndDrawing();
+
+            leaderboard.AddScore(username, score);
 
             if (Raylib.IsKeyPressed(KeyboardKey.Escape))
             {

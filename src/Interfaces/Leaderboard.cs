@@ -35,6 +35,18 @@ namespace Tetris_QMJ.src.Core
         {
             if (File.Exists(LeaderboardFilePath))
             {
+                if (!File.Exists(LeaderboardFilePath))
+                {
+                    // Créer un fichier avec les touches par défaut si le fichier n'existe pas
+                    File.WriteAllLines(LeaderboardFilePath, new[]
+                    {
+                        "Player1:0",
+                        "Player2:0",
+                        "Player3:0",
+                        "Player4:0",
+                        "Player5:0"
+                    });
+                }
                 var lines = File.ReadAllLines(LeaderboardFilePath);
                 foreach (var line in lines)
                 {

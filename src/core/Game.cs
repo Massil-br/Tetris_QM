@@ -81,7 +81,7 @@ namespace Tetris_QMJ.src.Core
                 {
                     // GAME OVER
                     // AudioGame.PlayMusicStream(AudioGame.musicBackgroundGameOver);
-                    EntryCode = GameOver.PrintGameOver(windowWidth, windowHeight, MainMenuFont, grid.Score);
+                    EntryCode = GameOver.PrintGameOver(windowWidth, windowHeight, MainMenuFont,  grid.Score);
                 }
 
                 // CLOSE WINDOW
