@@ -7,7 +7,8 @@ using Raylib_cs;
 namespace Tetris_QMJ.src.Core
 {
     public class Options
-    {
+    {   
+        public float Volume { get; set; } = 0.5f;
         private const string FilePath = "./src/Interfaces/option_key.txt";
         public Dictionary<string, KeyboardKey> KeyBindings { get; private set; }
         public Options(){

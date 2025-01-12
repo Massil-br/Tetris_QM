@@ -173,18 +173,18 @@ namespace Tetris_QMJ.src.Core
 
             while (inOptionsMenu && !Raylib.WindowShouldClose())
             {
-                // permet de detecter les touches du clavier pour la navigation dans le menu option
+                // Permet de détecter les touches du clavier pour la navigation dans le menu option
                 if (Raylib.IsKeyPressed(KeyboardKey.Down))
                 {
-                    selectedIndex = (selectedIndex + 1) % actions.Count;
+                    selectedIndex = (selectedIndex + 1) % (actions.Count + 1); // Inclure la barre de volume
                 }
                 else if (Raylib.IsKeyPressed(KeyboardKey.Up))
                 {
-                    selectedIndex = (selectedIndex - 1 + actions.Count) % actions.Count;
+                    selectedIndex = (selectedIndex - 1 + actions.Count + 1) % (actions.Count + 1); // Inclure la barre de volume
                 }
-                else if (Raylib.IsKeyPressed(KeyboardKey.Enter))
+                else if (Raylib.IsKeyPressed(KeyboardKey.Enter) && selectedIndex < actions.Count)
                 {
-                    //permet de modifier la touche de l action souhaite$é
+                    // Permet de modifier la touche de l'action souhaitée
                     string action = actions[selectedIndex];
                     NewKey(options, action);
                 }
@@ -192,6 +192,27 @@ namespace Tetris_QMJ.src.Core
                 {
                     inOptionsMenu = false;
                     return 0;
+                }
+                else if (selectedIndex == actions.Count) // Contrôles pour la barre de volume
+                {
+                    if (Raylib.IsKeyPressed(KeyboardKey.Right))
+                    {
+                        options.Volume = Math.Min(options.Volume + 0.1f, 1.0f); // Augmenter le volume
+                        AudioGame.Volume = options.Volume;
+                        Console.WriteLine("++");
+                        Console.WriteLine(options.Volume);
+                        Console.WriteLine(AudioGame.Volume);
+                        AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
+                    }
+                    else if (Raylib.IsKeyPressed(KeyboardKey.Left))
+                    {
+                        options.Volume = Math.Max(options.Volume - 0.1f, 0.0f); // Diminuer le volume
+                        AudioGame.Volume = options.Volume;
+                        Console.WriteLine("--");
+                        Console.WriteLine(options.Volume);
+                        Console.WriteLine(AudioGame.Volume);
+                        AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
+                    }
                 }
 
                 Raylib.BeginDrawing();
@@ -206,6 +227,11 @@ namespace Tetris_QMJ.src.Core
                     Raylib.DrawText($"{actions[i]}: {options.KeyBindings[actions[i]]}",
                                     50, 50 + i * 30, 20, textColor);
                 }
+
+                Color volumeColor = (selectedIndex == actions.Count) ? Color.Yellow : Color.White;
+                Raylib.DrawText("Volume:", 50, 50 + actions.Count * 30, 20, volumeColor);
+                Raylib.DrawRectangle(150, 50 + actions.Count * 30, 200, 20, Color.Gray);
+                Raylib.DrawRectangle(150, 50 + actions.Count * 30, (int)(200 * options.Volume), 20, Color.Green);
 
                 MainMenu.DrawParticlesBackground(Raylib.GetRenderWidth(), Raylib.GetRenderHeight());
                 Raylib.EndDrawing();

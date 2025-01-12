@@ -1,12 +1,13 @@
 using Raylib_cs;
+using Tetris_QMJ.src.Core;
+using Tetris_QMJ.src.Interfaces;
 
 namespace Tetris_QMJ.src.Audio
 {
     public class AudioGame
     {   
         // Useful variable for game music
-
-        public static float volume = 0.5f;
+        public static float Volume { get; set; } = 0.5f;
         private static bool isMusicPlaying = false;
 
         // Variables for each music/sound in the game --> initialized in the InitAudioGame() function
@@ -38,7 +39,7 @@ namespace Tetris_QMJ.src.Audio
             if (!isMusicPlaying)
             {
                 Raylib.PlayMusicStream(music);
-                Raylib.SetMusicVolume(music, volume);
+                Raylib.SetMusicVolume(music, Volume);
                 isMusicPlaying = true;
             }
             Raylib.UpdateMusicStream(music);
@@ -48,7 +49,7 @@ namespace Tetris_QMJ.src.Audio
 
         public static void PlaySound(Sound sound)
         {   
-            Raylib.SetSoundVolume(sound, volume);
+            Raylib.SetSoundVolume(sound, Volume);
             Raylib.PlaySound(sound);
         }
 
