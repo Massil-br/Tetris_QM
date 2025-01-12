@@ -23,9 +23,9 @@ namespace Tetris_QMJ.src.Core
         {
             scores.Add((username, score));
             scores.Sort((a, b) => b.Score.CompareTo(a.Score));  // Sort descending
-            if (scores.Count > 5)
+            if (scores.Count > 10)
             {
-                scores.RemoveAt(5);  // Keep only top 5
+                scores.RemoveAt(10);  // Keep only top 5
             }
             SaveScores();
         }
