@@ -103,8 +103,9 @@ namespace Tetris_QMJ.src.Core
 
             // Generates a new random piece
             Piece randomNextPiece = PieceFactory.GenerateRandomPiece(1);
+            Piece firstPiece = PieceFactory.GenerateRandomPiece(1);
             grid.NextPiece = randomNextPiece;
-            grid.ActivePiece = grid.NextPiece;
+            grid.ActivePiece = firstPiece;
             // grid.AddPiece(grid.ActivePiece);
             // grid.SetActivePiece(grid.ActivePiece);
 
