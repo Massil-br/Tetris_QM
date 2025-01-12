@@ -27,15 +27,17 @@ namespace Tetris_QMJ.src.Core {
         }
 
         public void MoveDown() {
+            // vérifie si la pièce est nulle ou non
             if (piece == null) {
                 throw new InvalidOperationException("Piece is null in MoveDown");
             }
 
             grid.RemovePiece(piece);
 
+            // vérifie si la pièce est en dehors de la grille en bas
             piece.X += 1;
 
-            // Vérifie les collisions en bas de la grille
+            // vérifie les collisions en bas de la grille
             if (!grid.AddPiece(piece)) {
                 piece.X -= 1; 
                 grid.AddPiece(piece);
@@ -49,10 +51,12 @@ namespace Tetris_QMJ.src.Core {
             }
         }
 
+        // permet de gerer la vitesse de la pièce en fonction des entreés clavier du joueur
         public void HandleInput(float deltaTime) {
 
             timeGen.UpdateTimer();
 
+            // verifie si on doit changer la vitesse de la pièce
             int minutes = (int)(timeGen.Rapidite()/60);
             if (minutes > lastMinForSpeed){
                 Speed();
@@ -84,15 +88,19 @@ namespace Tetris_QMJ.src.Core {
         }
 
         public void MoveLeft() {
+            // vérifie si la pièce est nulle ou non
             if (piece == null) {
                 throw new InvalidOperationException("Piece is null in MoveLeft");
             }
+
+            // vérifie si la pièce est en dehors de la grille
             if (piece.Y != 0) {
                 grid.RemovePiece(piece);
             }
 
             piece.Y -= 1;
 
+            // vérifie les collisions à gauche de la grille
             if (!grid.AddPiece(piece)) {
                 piece.Y += 1; 
             } else {
@@ -101,15 +109,19 @@ namespace Tetris_QMJ.src.Core {
         }
 
         public void MoveRight() {
+            // vérifie si la pièce est nulle ou non
             if (piece == null) {
                 throw new InvalidOperationException("Piece is null in MoveRight");
             }
+
+            // vérifie si la pièce est en dehors de la grille à droite
             if (piece.Y != grid.GridArray.GetLength(1) - 1) {
                 grid.RemovePiece(piece);
             }
 
             piece.Y += 1;
 
+            // vérifie les collisions à droite de la grille
             if (!grid.AddPiece(piece)) {
                 piece.Y -= 1; 
             } else {
@@ -117,6 +129,7 @@ namespace Tetris_QMJ.src.Core {
             }
         }
 
+        //met a jour le timer de l intervalle de temps pour la descente de la pièce
         public void UpdateTimer(float deltaTime) {
             timer += deltaTime;
 
@@ -126,6 +139,7 @@ namespace Tetris_QMJ.src.Core {
             }
         }
 
+        //permet de changer la pièce active
         public void SetPiece(Entities.Piece ActivePiece) {
             this.piece = ActivePiece;
             grid.SetActivePiece(ActivePiece);

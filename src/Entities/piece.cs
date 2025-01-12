@@ -20,11 +20,13 @@ namespace Tetris_QMJ.src.Entities
             Shape = shape;
         }
 
+        //permet de faire tourner la pièce de 90° dans le sens horaire
         public void Rotation90(){
             int rows = Shape.GetLength(0);
             int column = Shape.GetLength(1);
             int [,] rotate = new int[column, rows];
 
+            //rotation de la pièce
             for (int i = 0; i <rows; i++){
                 for (int j = 0; j < column; j++){
                     rotate[j, rows - i - 1] = Shape[i, j];

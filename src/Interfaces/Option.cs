@@ -10,13 +10,12 @@ namespace Tetris_QMJ.src.Core
     {
         private const string FilePath = "./src/Interfaces/option_key.txt";
         public Dictionary<string, KeyboardKey> KeyBindings { get; private set; }
-
         public Options(){
             KeyBindings = new Dictionary<string, KeyboardKey>();
             LoadKey();
         }
 
-        //Permet de charger les touches du fichier qui se trouve dans le fichier option_key.txt
+        //charge les touches du fichier qui se trouve dans le fichier option_key.txt
         public void LoadKey(){
             if (!File.Exists(FilePath))
             {
@@ -30,6 +29,7 @@ namespace Tetris_QMJ.src.Core
                 });
             }
             KeyBindings.Clear();
+            // charge les touches du fichier option_key.txt
             var lines = File.ReadAllLines(FilePath);
             foreach (var line in lines)
             {
@@ -41,7 +41,7 @@ namespace Tetris_QMJ.src.Core
             }
         }
 
-        //Permet de sauvegarder les touches dans le fichier
+        //permet de sauvegarder les touches dans le fichier
         public void SaveKey(){
             List<string> lines = new List<string>();
             foreach (var key in KeyBindings)
@@ -51,7 +51,7 @@ namespace Tetris_QMJ.src.Core
             File.WriteAllLines(FilePath, lines);
         }
 
-        //Permet de changer une touche
+        //permet de changer une touche
         public void SetKey(string action, KeyboardKey key){
             if (KeyBindings.ContainsKey(action))
             {

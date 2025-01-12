@@ -128,13 +128,13 @@ namespace Tetris_QMJ.src.Core
                 Raylib.BeginDrawing();  // Starts the drawing phase
                 Raylib.ClearBackground(Color.Black);
 
-                // Calculates deltaTime (time elapsed since the last frame)
+                // calcul le temps écoulé depuis la dernière frame
                 float deltaTime = Raylib.GetFrameTime();
 
-                // Updates the timer and moves the piece if necessary
+                // met a jour le timer pour la vitesse de la pièce et les déplacements de la pièce
                 moveHandler.UpdateTimer(deltaTime);
 
-                // Updates and displays the timer
+                // met a jour et affiche le timer
                 timer.UpdateTimer();
                 timer.ShowTime(10, 10, font, 40, Color.White);
 
@@ -152,16 +152,17 @@ namespace Tetris_QMJ.src.Core
             return 99;
         }
 
+        //Affiche le menu option
         public static int ShowOptionsMenu(Options options)
         {
-            // List of actions for which we can configure keys
+            // liste les actions du menu option
             var actions = options.KeyBindings.Keys.ToList();
             int selectedIndex = 0;
             bool inOptionsMenu = true;
 
             while (inOptionsMenu && !Raylib.WindowShouldClose())
             {
-                // Detect keys for menu navigation
+                // permet de detecter les touches du clavier pour la navigation dans le menu option
                 if (Raylib.IsKeyPressed(KeyboardKey.Down))
                 {
                     selectedIndex = (selectedIndex + 1) % actions.Count;
@@ -172,7 +173,7 @@ namespace Tetris_QMJ.src.Core
                 }
                 else if (Raylib.IsKeyPressed(KeyboardKey.Enter))
                 {
-                    // Allows modifying the key for the selected action
+                    //permet de modifier la touche de l action souhaite$é
                     string action = actions[selectedIndex];
                     NewKey(options, action);
                 }
@@ -187,6 +188,7 @@ namespace Tetris_QMJ.src.Core
 
                 Raylib.DrawText("Options Menu - Press ESCAPE to Exit", 200, 10, 20, Color.White);
 
+                //affiche les actions et les touches associées dans le menu option
                 for (int i = 0; i < actions.Count; i++)
                 {
                     Color textColor = (i == selectedIndex) ? Color.Yellow : Color.White;
@@ -200,10 +202,12 @@ namespace Tetris_QMJ.src.Core
             return 0;
         }
 
+        // permet de changer la touche d'une action dans le menu option
         private static void NewKey(Options options, string action)
         {
             bool waitingForKey = true;
 
+            //attent qu'une touche choisi soit pressée par l utilisateur
             while (waitingForKey && !Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
@@ -212,12 +216,12 @@ namespace Tetris_QMJ.src.Core
                 Raylib.DrawText($"Press a key for {action}", 260, 250, 20, Color.White);
                 Raylib.EndDrawing();
 
-                // Checks if a key is pressed
+                // parcours toutes les touches du clavier
                 foreach (KeyboardKey key in Enum.GetValues(typeof(KeyboardKey)))
                 {
                     if (Raylib.IsKeyPressed(key))
                     {
-                        // Updates the key for the specified action
+                        // met a jour la touche de l'action
                         options.SetKey(action, key);
                         waitingForKey = false;
                         break;

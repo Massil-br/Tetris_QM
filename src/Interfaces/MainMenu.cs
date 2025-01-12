@@ -146,21 +146,23 @@ namespace Tetris_QMJ.src.Interfaces
             float optionsButtonY = leaderButtonY + scaledButtonHeightLeader + buttonSpacing;
             float quitButtonY = optionsButtonY + scaledButtonHeightOptions + buttonSpacing;
 
+            //bouton Play
             Raylib.DrawTexturePro(playButtonTexture,
                                 new Rectangle(0, 0, buttonWidthPlay, buttonHeightPlay),
                                 new Rectangle(startXPlay, playButtonY, scaledButtonWidthPlay, scaledButtonHeightPlay),
                                 Vector2.Zero, 0.0f, Color.White);
 
+            //bouton Leaderboard
             Raylib.DrawTexturePro(leaderButtonTexture,
                                 new Rectangle(0, 0, buttonWidthLeader, buttonHeightLeader),
                                 new Rectangle(startXLeader, leaderButtonY, scaledButtonWidthLeader, scaledButtonHeightLeader),
                                 Vector2.Zero, 0.0f, Color.White);
-
+            //bouton Options
             Raylib.DrawTexturePro(optionsButtonTexture,
                                 new Rectangle(0, 0, buttonWidthOptions, buttonHeightOptions),
                                 new Rectangle(startXOptions, optionsButtonY, scaledButtonWidthOptions, scaledButtonHeightOptions),
                                 Vector2.Zero, 0.0f, Color.White);
-
+            //bouton Quit
             Raylib.DrawTexturePro(quitButtonTexture,
                                 new Rectangle(0, 0, buttonWidthQuit, buttonHeightQuit),
                                 new Rectangle(startXQuit, quitButtonY, scaledButtonWidthQuit, scaledButtonHeightQuit),
@@ -189,11 +191,13 @@ namespace Tetris_QMJ.src.Interfaces
             }
         }
 
+        //demande et recupere le nom d'utilisateur du joueur
         public static string GetUsername(int screenWidth, int screenHeight, Font font)
         {
             string username = "";
             bool enterPressed = false;
 
+            //boucle qui permet de recuperer le nom d'utilisateur choisi par le joueur
             while (!enterPressed && !Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
@@ -204,18 +208,22 @@ namespace Tetris_QMJ.src.Interfaces
 
                 Raylib.EndDrawing();
 
+                // Récupérer la touche pressée par l'utilisateur
                 int key = Raylib.GetKeyPressed();
                 if (key > 0)
                 {
                     if (key == (int)KeyboardKey.Backspace && username.Length > 0)
                     {
+                        // permet de supprimer un caractere
                         username = username.Substring(0, username.Length - 1);
                     }
                     else if (key == (int)KeyboardKey.Enter)
                     {
+                        // permet de valider le nom d'utilisateur
                         enterPressed = true;
                     }
-                    else if (key >= 32 && key <= 126) // Printable ASCII characters
+                    // limite la taille du nom d'utilisateur a 16 caracteres
+                    else if (key >= 32 && key <= 126 && username.Length < 16)
                     {
                         username += MapAzertyKey((char)key);
                     }
@@ -224,7 +232,9 @@ namespace Tetris_QMJ.src.Interfaces
             return username;
         }
 
-        private static char MapAzertyKey(char key)
+
+        //func qui permet au jeu de fonctionner en azerty au lieu d etre en qwerty
+        public static char MapAzertyKey(char key)
         {
             // Dictionnaire pour mapper les caractères AZERTY vers leur équivalent
             Dictionary<char, char> azertyMap = new Dictionary<char, char>

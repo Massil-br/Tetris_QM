@@ -13,11 +13,6 @@ namespace Tetris_QMJ.src.Core {
             this.grid = grid;
         }
 
-        public Rotation (Grid grid, Rotation rotation){
-            this.grid = grid;
-            
-        }
-
         public void HandleInput() {
             // Vérifie si la touche de rotation est pressée
             if (Raylib.IsKeyPressed(options.KeyBindings["Rotate"])) 
