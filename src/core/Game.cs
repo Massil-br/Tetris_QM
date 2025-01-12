@@ -32,6 +32,7 @@ namespace Tetris_QMJ.src.Core
             AudioGame.InitAudioGame();
             Raylib.SetTargetFPS(165); // window FPS 
             Font MainMenuFont = Raylib.LoadFont("assets/font/Team 401.ttf");
+            Font font = Raylib.LoadFont("assets/font/College Squad Regular.ttf");
             MainMenu.InitButtonTextures();
             Raylib.SetExitKey(KeyboardKey.Null);
 
@@ -78,7 +79,7 @@ namespace Tetris_QMJ.src.Core
                 {
                     // Leaderboard
                     AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
-                    EntryCode = leaderboard.Display(windowWidth, windowHeight, MainMenuFont);
+                    EntryCode = leaderboard.Display(windowWidth, windowHeight, font);
                     
                 }
                 else if (EntryCode == 5)
