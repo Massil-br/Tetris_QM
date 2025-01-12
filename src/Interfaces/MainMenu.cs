@@ -194,7 +194,6 @@ namespace Tetris_QMJ.src.Interfaces
         //demande et recupere le nom d'utilisateur du joueur
         public static string GetUsername(int screenWidth, int screenHeight, Font font)
         {
-            string username = "";
             bool enterPressed = false;
 
             //boucle qui permet de recuperer le nom d'utilisateur choisi par le joueur

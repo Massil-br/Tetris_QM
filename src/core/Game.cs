@@ -20,6 +20,7 @@ namespace Tetris_QMJ.src.Core
         static Grid grid = new(gridRows, gridColumns);
         static Options options = new Options();
         static Leaderboard leaderboard = new Leaderboard();
+        private static string username;
 
         // The InitWindow() function first calls all functions that initialize different variables needed for the program
         // and then contains the main game loop
@@ -49,6 +50,7 @@ namespace Tetris_QMJ.src.Core
                     if (EntryCode == 1)
                     {
                         grid = new Grid(gridRows, gridColumns);
+                        username = MainMenu.GetUsername(windowWidth, windowHeight, MainMenuFont);
                     }
                 }
                 // GAME
@@ -67,6 +69,7 @@ namespace Tetris_QMJ.src.Core
                 else if (EntryCode == 3)
                 {
                     // OPTIONS MENU;
+                    AudioGame.PlaySound(AudioGame.soundButtonMenu);
                     Console.WriteLine("option menu");
                     EntryCode = ShowOptionsMenu(options);
                     options.SaveKey();
@@ -74,14 +77,15 @@ namespace Tetris_QMJ.src.Core
                 else if (EntryCode == 4)
                 {
                     // Leaderboard
-                    EntryCode =leaderboard.Display(windowWidth, windowHeight, MainMenuFont);
+                    AudioGame.PlaySound(AudioGame.soundButtonMenu);
+                    EntryCode = leaderboard.Display(windowWidth, windowHeight, MainMenuFont);
                     
                 }
                 else if (EntryCode == 5)
                 {
                     // GAME OVER
                     // AudioGame.PlayMusicStream(AudioGame.musicBackgroundGameOver);
-                    EntryCode = GameOver.PrintGameOver(windowWidth, windowHeight, MainMenuFont,  grid.Score);
+                    EntryCode = GameOver.PrintGameOver(windowWidth, windowHeight, MainMenuFont, grid.Score);
                 }
 
                 // CLOSE WINDOW
@@ -152,6 +156,7 @@ namespace Tetris_QMJ.src.Core
 
                 if (grid.IsSpawnPositionFree() == false)
                 {
+                    leaderboard.AddScore(username, grid.Score);
                     return 5;
                 }
 

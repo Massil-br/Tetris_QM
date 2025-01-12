@@ -10,7 +10,7 @@ namespace Tetris_QMJ.src.Core
     public class Leaderboard
     {
         private const string LeaderboardFilePath = "./src/Interfaces/leaderboard.txt";
-        private List<(string Username, int Score)> scores;
+        public List<(string Username, int Score)> scores;
 
         public Leaderboard()
         {
@@ -94,20 +94,6 @@ namespace Tetris_QMJ.src.Core
                 return 0;
             }
             return 4; // pour rester dans le leaderBoard
-        }
-
-        //retourne les 5 meilleurs scores
-        public List<string> GetTopScores()
-        {
-            List<string> topScores = new List<string>();
-
-            // Retrieve the top 5 scores
-            foreach (var score in scores.Take(5))
-            {
-                topScores.Add($"{score.Username} - {score.Score}");
-            }
-
-            return topScores;
         }
     }
 }
