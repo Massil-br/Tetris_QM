@@ -72,7 +72,7 @@ namespace Tetris_QMJ.src.Core
         }
 
         //affiche le leaderboard
-        public void Display(int screenWidth, int screenHeight, Font font)
+        public int Display(int screenWidth, int screenHeight, Font font)
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.Black);
@@ -89,6 +89,11 @@ namespace Tetris_QMJ.src.Core
             }
             
             Raylib.EndDrawing();
+
+            if (Raylib.IsKeyPressed(KeyboardKey.Escape)){
+                return 0;
+            }
+            return 4; // pour rester dans le leaderBoard
         }
 
         //retourne les 5 meilleurs scores

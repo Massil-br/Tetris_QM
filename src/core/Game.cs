@@ -74,8 +74,8 @@ namespace Tetris_QMJ.src.Core
                 else if (EntryCode == 4)
                 {
                     // Leaderboard
-                    leaderboard.Display(windowWidth, windowHeight, MainMenuFont);
-                    EntryCode = 4;
+                    EntryCode =leaderboard.Display(windowWidth, windowHeight, MainMenuFont);
+                    
                 }
                 else if (EntryCode == 5)
                 {
