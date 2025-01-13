@@ -42,12 +42,12 @@ namespace Tetris_QMJ.src.Core
             {
                 int windowHeight = Raylib.GetRenderHeight();
                 int windowWidth = Raylib.GetRenderWidth();
+                AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
 
                 // MENU
                 if (EntryCode == 0)
                 {
                     EntryCode = MainMenu.PrintMainMenu(windowWidth, windowHeight, MainMenuFont);
-                    AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
                     if (EntryCode == 1)
                     {
                         grid = new Grid(gridRows, gridColumns);
@@ -57,20 +57,18 @@ namespace Tetris_QMJ.src.Core
                 // GAME
                 else if (EntryCode == 1)
                 {
-                    AudioGame.PlaySound(AudioGame.soundButtonMenu);
                     EntryCode = GameLoop(grid);
                 }
                 // PAUSE
                 else if (EntryCode == 2)
                 {
-                    AudioGame.PlaySound(AudioGame.soundButtonMenu);
+                   
                     Console.WriteLine("PAUSE");
                     EntryCode = 0;
                 }
                 else if (EntryCode == 3)
                 {
                     // OPTIONS MENU;
-                    AudioGame.PlaySound(AudioGame.soundButtonMenu);
                     Console.WriteLine("option menu");
                     EntryCode = ShowOptionsMenu(options);
                     options.SaveKey();
@@ -78,9 +76,7 @@ namespace Tetris_QMJ.src.Core
                 else if (EntryCode == 4)
                 {
                     // Leaderboard
-                    AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
                     EntryCode = leaderboard.Display(windowWidth, windowHeight, font);
-                    
                 }
                 else if (EntryCode == 5)
                 {
@@ -130,6 +126,7 @@ namespace Tetris_QMJ.src.Core
             // The game loop continues as long as the window is not closed
             while (!Raylib.WindowShouldClose())
             {
+                AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
                 windowHeight = Raylib.GetRenderHeight();
                 windowWidth = Raylib.GetRenderWidth();
                 cellSize = Math.Min(windowWidth / (gridColumns + 2), windowHeight / (gridRows + 2));
@@ -163,7 +160,8 @@ namespace Tetris_QMJ.src.Core
                 }
 
                 if (Raylib.IsKeyPressed(KeyboardKey.Escape))
-                {
+                {   
+                    MainMenu.username = "";
                     return 2;
                 }
             }

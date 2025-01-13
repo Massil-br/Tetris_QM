@@ -2,6 +2,7 @@ using Raylib_cs;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Tetris_QMJ.src.Audio;
 using Tetris_QMJ.src.Entities;
 
 namespace Tetris_QMJ.src.Interfaces
@@ -201,6 +202,7 @@ namespace Tetris_QMJ.src.Interfaces
             {
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.Black);
+                AudioGame.PlayMusicStream(AudioGame.musicBackgroundMainMenu1);
 
                 Raylib.DrawText("Enter your username:", screenWidth / 2 - 100, screenHeight / 2 - 50, 20, Color.White);
                 Raylib.DrawText(username, screenWidth / 2 - 100, screenHeight / 2, 20, Color.White);
